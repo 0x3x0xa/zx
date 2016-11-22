@@ -21,42 +21,58 @@
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title></title>
+<title>奖金收支明细</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务管理 <span class="c-gray en">&gt;</span>企业利润比例列表<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
-
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务管理 <span class="c-gray en">&gt;</span> 奖金收支明细  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<form method="get" action="/index.php/Report/index.html">
 <div class="pd-20">
-  <div class="text-c">
-   参考价格：<?php echo ($monovalent); ?>
+  <div class="text-c">积分类型
+  <span class="select-box" style='width:200px;'>
+	<select name="search_type" class='select' value="">
+	<option value="" >全部显示</option>
+        <?php if(is_array($type)): foreach($type as $key=>$vo): ?><option value="<?php echo ($key); ?>" <?php if($arr["search_type"] == $key): ?>selected<?php elseif($_GET['search_type']== $key): ?>selected<?php endif; ?>><?php echo ($vo); ?></option><?php endforeach; endif; ?>
+   </select>
+  </span>&nbsp;
+	<label><input name="search_status" value="1" type="radio"  <?php if($arr["search_status"] == 1): ?>checked<?php endif; ?>>收入</label>&nbsp;
+    <label><input name="search_status" value="2" type="radio"  <?php if($arr["search_status"] == 2): ?>checked<?php endif; ?>> 支出</label>&nbsp; &nbsp;  &nbsp; 
+    日期范围：<input type="text" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" name='search_starttime' class="input-text Wdate" style="width:120px;" value="<?php echo ($arr['search_starttime']); ?>">
+    -
+    <input type="text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" name='search_endtime' id="datemax" class="input-text Wdate" style="width:120px;" value="<?php echo ($arr['search_endtime']); ?>">
+    <input type="text" class="input-text" style="width:200px" placeholder="输入账号" id="" value="<?php echo ($arr['search_username']); ?>" name="search_username" ><button type="submit" class="btn btn-success" id="" ><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 
   </div>
-
+  </form>
   <div class="cl pd-5 bg-1 bk-gray mt-20">
-      <span class="l"> 
-          <button type="button" class="btn btn-success excel" id="" onClick="showPage('600','250','添加单价','<?php echo U('Report/addzengzhi');?>')" href="javascript:;" ><i class="Hui-iconfont">&#xe6df;</i> 添加单价</button>
-            </span>
+ 
     <span class="r">共有数据：<strong><?php echo ($count); ?></strong> 条</span>
   </div>
   <table class="table table-border table-bordered table-hover table-bg table-sort">
     <thead>
       <tr class="text-c">
+       
         <th width="30">ID</th>
-        <th width="">每月的时间</th>
-        <th width="">单价</th>
-	<th width="120">添加日期</th>
-	<!--<th width="">状态</th>-->
-	<th width="120">操作</th>
+	<th width="80">账号</th>
+	<th width="100">积分类型</th>
+        <th width="30">类型</th>
+        <th width="">收入</th>
+        <th width="">支出</th>
+        <th width="">余额</th>
+	<th width="">描述</th>
+	<th width="120">创建日期</th>
       </tr>
     </thead>
     <tbody>
 	<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr class="text-c">
-	 <td><?php echo ($i); ?></td>
-        <td><?php echo (date('Y-m-d H:i:s',$vo["week"])); ?></td>
-        <td><?php echo ($vo["price"]); ?></td>
-	<td><?php echo (date('Y-m-d H:i:s',$vo["create_date"])); ?></td>
-        <!--<td class="text-c"><?php echo ($status[$vo[status]]); ?></td>-->
-        <td class=""><u onclick="showPage('600','250','修改信息','<?php echo U('Report/savezengzhi',array('id'=>$vo['id']));?>')" class="text-primary" style="cursor:pointer">编辑 </td>
+        <td><?php echo ($i); ?></td>
+	<td><?php echo ($vo["username"]); ?></td>
+	<td><?php echo ($type[$vo['type']]); ?></td>
+        <td><?php echo ($status[$vo['status']]); ?></td>
+        <td><?php echo ($vo["income"]); ?></td>
+        <td><?php echo ($vo["expend"]); ?></td>
+	<td><?php echo ($vo["balance"]); ?></td>
+	<td class="text-l"><?php echo ($vo["message"]); ?></td>
+        <td class="user-status"><?php echo (date('Y-m-d H:i:s',$vo["create_date"])); ?></td>
       </tr><?php endforeach; endif; else: echo "" ;endif; ?>
     </tbody>
   </table>

@@ -853,36 +853,79 @@ class ReportController extends CommonController {
                 array_push($mothtime, $times);
             }
         }
+    //    p($monthjson);
+      //  p($pricejson);
         $this->assign('monthjson', $monthjson);
         $this->assign('pricejson', $pricejson);
         $this->display();
     }
 
-    //溢价积分
+    //企业利润走势
     public function zenzhibonus() {
         //$uis=  session('uid');
 
-        $bonus_table = M('bonus');
+//        $bonus_table = M('bonus');
+//        $priceweek_table = M('priceweek');
+//        $weektime = array();
+//        $week = mktime(0, 0, 0, date('m'), date('d') - date('w'), date('Y')); //当周第一天(星期日)
+//        $weeks = $week - 60 * 60 * 24 * 7 * 7;
+//        for ($i = 0; $i < 7; $i++) {
+//            $weeks+=60 * 60 * 24 * 7;
+//            $weektime[$i] = $weeks;
+//            $date.="'" . date('Y-m-d ', $weeks) . "'" . ',';
+//        }
+//        for ($j = 0; $j < 7; $j++) {
+//
+//            $list1 = $priceweek_table->field('price')->where(array('week' => $weektime[$j]))->find();
+//            $null = '0';
+//            $price = (empty($list1)) ? $null : $list1['price'];
+//            $weekprice.=$price . ',';
+//        }
+//        $pricejson = trim($weekprice, ',');
+//        $weekdate = trim($date, ',');
+//        p($pricejson);
+//        p($weekdate);
+//        $this->assign('weekdate', $date);
+//        $this->assign('pricejson', $pricejson);
+//        
+        
+        $nowmonth = mktime(0, 0, 0, date('m'), 1, date('Y')); //当月第一天的时间戳
+        $mothtime = array(); //十二个月的时间
+        $m = date('m');
+        for ($i = 1; $i < 13; $i++) {
+            $times = mktime(0, 0, 0, $i, 1, date('Y'));
+
+            array_push($mothtime, $times);
+        }
+      
         $priceweek_table = M('priceweek');
-        $weektime = array();
-        $week = mktime(0, 0, 0, date('m'), date('d') - date('w'), date('Y')); //当周第一天(星期日)
-        $weeks = $week - 60 * 60 * 24 * 7 * 7;
-        for ($i = 0; $i < 7; $i++) {
-            $weeks+=60 * 60 * 24 * 7;
-            $weektime[$i] = $weeks;
-            $date.="'" . date('Y-m-d ', $weeks) . "'" . ',';
-        }
-        for ($j = 0; $j < 7; $j++) {
+        $monthmoney = '';
 
-            $list1 = $priceweek_table->field('price')->where(array('week' => $weektime[$j]))->find();
-            $null = '0';
-            $price = (empty($list1)) ? $null : $list1['price'];
-            $weekprice.=$price . ',';
+        for ($i = 0; $i < 12; $i++) {
+           
+            $list1 = $priceweek_table->where(array('week' => $mothtime[$i]))->find();//之前按周计算。现在按月计算
+            if ($list1['month'] > $nowmonth) {
+                $list1 = null;
+            }
+            if ($i < $m) {
+                $null = '0';
+                $price = (empty($list1)) ? $null : $list1['price'];
+                $monthprice.=$price . ',';
+            } else {
+                $null = 'null';
+                $price = (empty($list1)) ? $null : $list1['price'];
+                $monthprice.=$price . ',';
+            }
         }
-        $pricejson = trim($weekprice, ',');
-        $weekdate = trim($date, ',');
-
-        $this->assign('weekdate', $date);
+      
+        $pricejson = trim($monthprice, ',');
+        for ($i = 1; $i < 13; $i++) {
+            if ($i < $m) {
+                $times = mktime(0, 0, 0, $i, 1, date("Y"));
+                array_push($mothtime, $times);
+            }
+        }
+       
         $this->assign('pricejson', $pricejson);
 
 
@@ -1325,6 +1368,7 @@ class ReportController extends CommonController {
         $data = getbonusparam(); //获取的奖金比例参数
         $todayTime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
         $beginThismonth = mktime(0, 0, 0, date('m'), 1, date('Y'));  //当月第一天时间戳
+       
         $week = mktime(0, 0, 0, date('m'), date('d') - date('w'), date('Y')); //当周第一天
         $uid = session('uid');
         $member_table = M('member');
@@ -1333,7 +1377,7 @@ class ReportController extends CommonController {
         $memberlevel_table = M('memberlevel');
         $priceweek_table = M('priceweek');
         $member_table->startTrans();
-        $weekInfo = $priceweek_table->where(array('week' => $week))->find(); //获取到当周的单价信息
+        $weekInfo = $priceweek_table->where(array('week' => $beginThismonth))->find(); //获取到当月的单价信息
 
 
         $userInfo = $member_table->field('id,bank,bankno,account_name,integral,threepassword,level')->find($uid);
@@ -1345,7 +1389,7 @@ class ReportController extends CommonController {
             // $money = I('post.money', '', 'htmlspecialchars');
             $threepassword = I('post.threepassword', '', 'htmlspecialchars');
             $int_rel = $integral_table->field('id')->where(array('uid' => $uid, 'status' => 1))->find();
-            $int_rel1 = $integral_table->field('id')->where(array('uid' => $uid, 'week' => $week, 'status' => array('in', '1,2')))->find();
+            $int_rel1 = $integral_table->field('id')->where(array('uid' => $uid, 'week' => $beginThismonth, 'status' => array('in', '1,2')))->find();
             if (!$weekInfo) {
                 $json['status'] = 2;
                 $json['msg'] = '暂无报价，无法操作';
@@ -1360,7 +1404,7 @@ class ReportController extends CommonController {
             }
             if ($int_rel1) {
                 $json['status'] = 2;
-                $json['msg'] = '本周已经申请过了';
+                $json['msg'] = '本月已经申请过了';
                 echo json_encode($json);
                 exit;
             }
@@ -1395,7 +1439,7 @@ class ReportController extends CommonController {
                     $allusermoney = $userInfo['integral'] - $integral;
                     $relust1 = $member_table->save(array('id' => $uid, 'integral' => $allusermoney));
                     $relust2 = $bonus_table->add(array('uid' => $uid, 'type' => $bizhong, 'expend' => $integral, 'status' => '2', 'balance' => $allusermoney, 'message' => '卖出', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '10'));
-                    $relust3 = $integral_table->add(array('univalent' => $weekInfo['price'], 'totalmoney' => $weekInfo['price'] * $integral, 'uid' => $uid, 'poundage' => $poundage, 'totalnum' => $integral, 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => time(), 'status' => 1, 'week' => $week));
+                    $relust3 = $integral_table->add(array('univalent' => $weekInfo['price'], 'totalmoney' => $weekInfo['price'] * $integral, 'uid' => $uid, 'poundage' => $poundage, 'totalnum' => $integral, 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => time(), 'status' => 1, 'week' => $beginThismonth));
 
                     break;
             }

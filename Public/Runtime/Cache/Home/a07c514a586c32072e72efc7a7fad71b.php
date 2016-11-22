@@ -1,113 +1,88 @@
-<include file='Common:head' />
-<title>折线图</title>
-</head>
-<body>
-    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务管理 <span class="c-gray en">&gt;</span> 企业利润走势 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/Public/H-ui/lib/html5.js"></script>
+<script type="text/javascript" src="/Public/H-ui/lib/respond.min.js"></script>
+<script type="text/javascript" src="/Public/H-ui/lib/PIE_IE678.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="/Public/H-ui/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/Public/H-ui/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="/Public/H-ui/lib/Hui-iconfont/1.0.7/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="/Public/H-ui/lib/icheck/icheck.css" />
+<link rel="stylesheet" type="text/css" href="/Public/H-ui/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="/Public/H-ui/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+  
+<title></title>
+<body>  
     <div class="page-container">
-        <div id="container" style="min-width:700px;height:400px"></div>
+        <form action=""  class="form form-horizontal SubmiForm" id="form-article-add"  >
+             <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">总积分：</label>
+                <div class="formControls col-xs-5 col-sm-4">
+               <?php echo ($userInfo["integral"]); ?>
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">当前单价：</label>
+                <div class="formControls col-xs-5 col-sm-4">
+               <?php echo ($price); ?>
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">申请卖出积分：</label>
+                <div class="formControls col-xs-5 col-sm-4">
+                    <input type="text" name="money"  onchange="zhiChuJinE_new(this.value)" placeholder="" value="<?php echo ($integral); ?>" readonly="readonly" class="input-text money"  nullmsg='不能为空' datatype='*' >
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">三级密码：</label>
+                <div class="formControls col-xs-5 col-sm-4">
+                    <input type="password" name="threepassword" id="" placeholder="" value="" class="input-text threepassword"  nullmsg='不能为空' datatype='*' >
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl text-c">
+                <button  class="btn btn-secondary radius"   type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认转让</button>
+                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </form>
     </div>
-     <div class="cl pd-5 bg-1 bk-gray mt-20">
-      <span class="l"> 
-          <button type="button" class="btn btn-success excel" id="" onClick="showPage('600','300','卖出','<{:U('Report/jifentixian')}>')" href="javascript:;" ><i class="Hui-iconfont">&#xe600;</i> 转让</button>
-               </span>
-    <span class="r">共有数据：<strong><{$count}></strong> 条</span>
-  </div>
-  <table class="table table-border table-bordered table-hover table-bg table-sort">
-    <thead>
-      <tr class="text-c">
-       
-        <th width="30">ID</th>
-        <th width="150">积分数量</th>
-        <th width="">单价</th>
-          <th width="">总价</th>
-         <th width="">状态</th>
-        <th width="120">创建日期</th>
-      </tr>
-    </thead>
-    <tbody>
-	<volist name='list' id='vo'>
-      <tr class="text-c">
-        <td><{$i}></td>
-        <td><{$vo.totalnum}></td> 
-        <td><{$vo.univalent}></td>
-        <td><{$vo.totalmoney}></td>
-        <td class="text-l"><{$status[$vo['status']]}></td>
-        <td class="user-status"><{$vo.create_date|date='Y-m-d H:i:s',###}></td>
-      </tr>
-	  </volist>
-    </tbody>
-  </table>
-  <div id="pageNav" class="pageNav"><{$page}></div>
-</div>
-    <div   style="text-align:right;display: none;">
+
+    <!--_footer 作为公共模版分离出去-->
+<div   style="text-align:right;display: none;">
     <span style="font-size: 9pt">
         <a id="StranLink" href="javascript:StranBody()" name="StranLink" style="text-decoration: none;" title="点击以简体中文方式浏览">
             <font color="#2e5282"><span style="font-size:10pt;">简体</span></font></a>
         <font color="#BF2600"><span style="font-size:10pt"></span></font>
     </span>
 </div>
-    <script type="text/javascript" src="__PUBLIC__/H-ui/lib/jquery/1.9.1/jquery.min.js"></script> 
-    <script type="text/javascript" src="__PUBLIC__/H-ui/lib/layer/2.1/layer.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/H-ui/static/h-ui/js/H-ui.js"></script> 
-    <script type="text/javascript" src="__PUBLIC__/H-ui/static/h-ui.admin/js/H-ui.admin.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/H-ui/lib/Highcharts/4.1.7/js/highcharts.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/H-ui/lib/Highcharts/4.1.7/js/modules/exporting.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('#container').highcharts({
-                credits: {
-                    enabled: false // 禁用版权信息
-                },
-                exporting: {
-                    enabled: false
-                },
-                title: {
-                    text: '',
-                    x: -20 //center
-                },
-                subtitle: {
-                    text: '',
-                    x: -20
-                },
-                xAxis: {
-                    categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
-                },
-                yAxis: {
-                    title: {
-                        text: '企业利润走势'
-                    },
-                    plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }]
-                },
-                tooltip: {
-                    valueSuffix: '￥'
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    borderWidth: 0
-                },
-                series: [
-//                    {
-//                        name: '溢价积分',
-//                        data: [<{$weekjson}>]
-//                    },
-                    {
-                name: '每月单价',
-                        data: [ <{$pricejson}> ]
-                }
-                ]
-            });
-        });
-        
-        
-        
-                
-         var Default_isFT =0;
+<script type="text/javascript" src="/Public/H-ui/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="/Public/H-ui/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="/Public/H-ui/lib/laypage/1.2/laypage.js"></script> 
+<script type="text/javascript" src="/Public/H-ui/lib/My97DatePicker/WdatePicker.js"></script> 
+<script type="text/javascript" src="/Public/H-ui/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="/Public/H-ui/lib/icheck/jquery.icheck.min.js"></script> 
+<script type="text/javascript" src="/Public/H-ui/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/Public/H-ui/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/Public/H-ui/lib/jquery.validation/1.14.0/messages_zh.min.js"></script>
+<script type="text/javascript" src="/Public/H-ui/lib/Validform/5.3.2/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="/Public/H-ui/static/h-ui/js/H-ui.js"></script> 
+<script type="text/javascript" src="/Public/js/home/H-ui.home.js"></script> 
+<script type="text/javascript" language="javascript">
+ var Default_isFT =0;
     var StranIt_Delay = 50      //翻译延时毫秒（设这个的目的是让网页先流畅的显现出来）
 //－－－－－－－代码开始，以下别改－－－－－－－
 //转换文本
@@ -236,6 +211,29 @@
             setTimeout("StranBody()", StranIt_Delay)
         }
     }
-    </script>
+</script>
 </body>
 </html>
+
+<!--/_footer /作为公共模版分离出去-->
+<script type="text/javascript">
+    $(function () {
+
+        $(".SubmiForm").Validform({
+            callback: function (form) {
+                jifentixian();
+                return false;
+            },
+            tiptype: 2,
+        });
+
+
+    })
+    function zhiChuJinE_new(money) {
+        var shouXufei = parseFloat("<?php echo ($data['tixian']); ?>");//手续费率
+        var shouXufeiCoin = (money * shouXufei).toFixed(2);//手续费
+        document.getElementById("serviceCharge").innerHTML = shouXufeiCoin;
+        var coin = (parseFloat(money) + parseFloat(shouXufeiCoin)).toFixed(2);
+        document.getElementById("zhiChujiangjin").innerHTML = coin;
+    }
+</script>

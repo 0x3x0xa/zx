@@ -1,4 +1,27 @@
-<include file='Common:head' />
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/Public/H-ui/lib/html5.js"></script>
+<script type="text/javascript" src="/Public/H-ui/lib/respond.min.js"></script>
+<script type="text/javascript" src="/Public/H-ui/lib/PIE_IE678.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="/Public/H-ui/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/Public/H-ui/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="/Public/H-ui/lib/Hui-iconfont/1.0.7/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="/Public/H-ui/lib/icheck/icheck.css" />
+<link rel="stylesheet" type="text/css" href="/Public/H-ui/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="/Public/H-ui/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+  
 <title>折线图</title>
 </head>
 <body>
@@ -8,9 +31,9 @@
     </div>
      <div class="cl pd-5 bg-1 bk-gray mt-20">
       <span class="l"> 
-          <button type="button" class="btn btn-success excel" id="" onClick="showPage('600','300','卖出','<{:U('Report/jifentixian')}>')" href="javascript:;" ><i class="Hui-iconfont">&#xe600;</i> 转让</button>
+          <button type="button" class="btn btn-success excel" id="" onClick="showPage('600','300','卖出','<?php echo U('Report/jifentixian');?>')" href="javascript:;" ><i class="Hui-iconfont">&#xe600;</i> 转让</button>
                </span>
-    <span class="r">共有数据：<strong><{$count}></strong> 条</span>
+    <span class="r">共有数据：<strong><?php echo ($count); ?></strong> 条</span>
   </div>
   <table class="table table-border table-bordered table-hover table-bg table-sort">
     <thead>
@@ -25,19 +48,17 @@
       </tr>
     </thead>
     <tbody>
-	<volist name='list' id='vo'>
-      <tr class="text-c">
-        <td><{$i}></td>
-        <td><{$vo.totalnum}></td> 
-        <td><{$vo.univalent}></td>
-        <td><{$vo.totalmoney}></td>
-        <td class="text-l"><{$status[$vo['status']]}></td>
-        <td class="user-status"><{$vo.create_date|date='Y-m-d H:i:s',###}></td>
-      </tr>
-	  </volist>
+	<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr class="text-c">
+        <td><?php echo ($i); ?></td>
+        <td><?php echo ($vo["totalnum"]); ?></td> 
+        <td><?php echo ($vo["univalent"]); ?></td>
+        <td><?php echo ($vo["totalmoney"]); ?></td>
+        <td class="text-l"><?php echo ($status[$vo['status']]); ?></td>
+        <td class="user-status"><?php echo (date('Y-m-d H:i:s',$vo["create_date"])); ?></td>
+      </tr><?php endforeach; endif; else: echo "" ;endif; ?>
     </tbody>
   </table>
-  <div id="pageNav" class="pageNav"><{$page}></div>
+  <div id="pageNav" class="pageNav"><?php echo ($page); ?></div>
 </div>
     <div   style="text-align:right;display: none;">
     <span style="font-size: 9pt">
@@ -46,12 +67,12 @@
         <font color="#BF2600"><span style="font-size:10pt"></span></font>
     </span>
 </div>
-    <script type="text/javascript" src="__PUBLIC__/H-ui/lib/jquery/1.9.1/jquery.min.js"></script> 
-    <script type="text/javascript" src="__PUBLIC__/H-ui/lib/layer/2.1/layer.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/H-ui/static/h-ui/js/H-ui.js"></script> 
-    <script type="text/javascript" src="__PUBLIC__/H-ui/static/h-ui.admin/js/H-ui.admin.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/H-ui/lib/Highcharts/4.1.7/js/highcharts.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/H-ui/lib/Highcharts/4.1.7/js/modules/exporting.js"></script>
+    <script type="text/javascript" src="/Public/H-ui/lib/jquery/1.9.1/jquery.min.js"></script> 
+    <script type="text/javascript" src="/Public/H-ui/lib/layer/2.1/layer.js"></script>
+    <script type="text/javascript" src="/Public/H-ui/static/h-ui/js/H-ui.js"></script> 
+    <script type="text/javascript" src="/Public/H-ui/static/h-ui.admin/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="/Public/H-ui/lib/Highcharts/4.1.7/js/highcharts.js"></script>
+    <script type="text/javascript" src="/Public/H-ui/lib/Highcharts/4.1.7/js/modules/exporting.js"></script>
     <script type="text/javascript">
         $(function () {
             $('#container').highcharts({
@@ -94,11 +115,11 @@
                 series: [
 //                    {
 //                        name: '溢价积分',
-//                        data: [<{$weekjson}>]
+//                        data: [<?php echo ($weekjson); ?>]
 //                    },
                     {
                 name: '每月单价',
-                        data: [ <{$pricejson}> ]
+                        data: [ <?php echo ($pricejson); ?> ]
                 }
                 ]
             });

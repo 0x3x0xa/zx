@@ -826,10 +826,10 @@ class ReportController extends CommonController {
             $setweek = mktime(0, 0, 0, $month, ($date - $week), $year); //设置天数的当周第一天  
             $setmonth = mktime(0, 0, 0, $month, 1, $year); //设置当月第一天的时间戳
 
-            $rel = $priceweek_table->where(array('week' => $setweek))->find();
+            $rel = $priceweek_table->where(array('week' => $setmonth))->find();//之前是按照周计算的。后来改为按月计算
             if ($rel) {
                 $json['status'] = 2;
-                $json['msg'] = '当周记录已经添加，操作失败';
+                $json['msg'] = '当月记录已经添加，操作失败';
                 echo json_encode($json);
                 exit;
             }
@@ -838,8 +838,9 @@ class ReportController extends CommonController {
                 'create_date' => time(), //这条记录的添加时间
                 'date' => date('Y-m-d H:i:s', $setweek), //这条记录的添加时间
                 'addtime' => $todayTime, //这条记录的添加时间
-                'month' => $setmonth,
-                'week' => $setweek,
+             //   'month' => $setmonth,
+               // 'week' => $setweek,
+                'week'=>$setmonth,
             ));
 
             if ($relust) {
