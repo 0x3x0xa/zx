@@ -1,0 +1,80 @@
+<include file='Common:head' />
+<title>上传图片</title>
+</head>
+<body>
+<div class="pd-20">
+  <div class="Huiform">
+     <form enctype="multipart/form-data" id="sky_upform" name="sky_upform" action="" method="post">
+      <table class="table table-bg">
+        <tbody>
+          <tr>
+            <th class="text-r"> 名称：</th>
+            <td><input type="text" style="width:300px" class="input-text title" value="" placeholder="" id="title" name="title"></td>
+          </tr>
+         
+         <tr>
+            <th class="text-r">图片：</th>
+            <td><input name="upfile" id="upfile" maxlength="20" size="40" type="file" class="input-text " value="" style="width:300px;padding: 0px;"/>
+			<font color="red" id="sky_txt"></font>
+		</td>
+          </tr>
+          <tr>
+            <th class="text-r">链接地址：</th>
+            <td><input type="text" style="width:300px" class="input-text href" value="" placeholder="http://www.xxx.com" id="href" name="href"></td>
+          </tr>
+		  <tr>
+            <th class="text-r">Tage：</th>
+            <td><input type="text" style="width:300px" class="input-text tage" value="" placeholder="" id="tage" name="tage"></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><button class="btn btn-success radius" name="upmit" type="button" id="upmit" onclick="sky_upfiles()"><i class="icon-ok"></i> 确定</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+<include file='Common:foot' />
+<script src="__JS__/admin/jquery-1.4.2.js" language="JavaScript" type="text/javascript"></script>
+<script src="__JS__/admin/jquery.form.js" language="JavaScript" type="text/javascript"></script>
+<script type="text/javascript">
+function sky_upfiles(){
+	var messtxt;
+ $("#sky_upform").ajaxSubmit({
+	//dataType:'script',
+	type:'post',
+	url: "/Admin/Picture/pictureadd",    
+	beforeSubmit: function(){
+		$("#sky_txt").html("图片上传中...");
+	},
+	success: function(data){        
+		if(data=="1"){
+		messtxt = "上传成功！";
+		 layer.msg('添加成功',{icon: 1,time:1000},function(){
+						 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+						 parent.location.reload();
+						 parent.layer.close(index); 
+						 
+						 });
+		}else if(data=="-1"){
+		messtxt = "文件超过规定大小！";
+		}else if(data=="-2"){
+		messtxt = "文件类型不符!";
+		}else if(data=="-3"){
+		messtxt = "移动文件出错!";
+		}else{
+		messtxt = "未知错误!";
+		}
+		$("#sky_txt").html(messtxt); 
+		
+
+		//$("#sky_txt").append(data);
+	},
+	resetForm: false,
+	clearForm: false
+});
+//$("#upimgform").submit();
+}
+
+        </script>

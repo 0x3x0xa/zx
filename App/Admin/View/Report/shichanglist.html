@@ -1,0 +1,56 @@
+<include file='Common:head' />
+<title></title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务管理 <span class="c-gray en">&gt;</span>市场业绩明细<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<form method="get" action="__SELF__">
+<div class="pd-20">
+  <div class="text-c">
+   <span class="select-box" style='width:140px;'>
+            <select name="search_quyi"  class='select' >
+             <option value="">选择区域</option> 
+			 <option value="1"  <if  condition="$arr['search_quyi'] eq 1 ">selected</if> >左区</option>
+			 <option value="2"  <if  condition="$arr['search_quyi'] eq 2 ">selected</if> >中区</option>
+			 <option value="3"  <if  condition="$arr['search_quyi'] eq 3 ">selected</if> >右区</option>
+            </select> 
+          </span>
+    日期范围：<input type="text" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" name='search_starttime' class="input-text Wdate" style="width:120px;" value="<{$arr['search_starttime']}>">
+    -
+    <input type="text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" name='search_endtime' id="datemax" class="input-text Wdate" style="width:120px;" value="<{$arr['search_endtime']}>">
+    <input type="text" class="input-text" style="width:200px" placeholder="输入账号" id="" value="<{$arr['search_username']}>" name="search_username" ><button type="submit" class="btn btn-success" id="" ><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+
+  </div>
+  </form>
+  <div class="cl pd-5 bg-1 bk-gray mt-20">
+ 
+    <span class="r">共有：<strong><{$search_money}></strong>元 &nbsp;&nbsp;共有数据：<strong><{$count}></strong> 条</span>
+  </div>
+  <table class="table table-border table-bordered table-hover table-bg table-sort">
+    <thead>
+      <tr class="text-c">
+          <th width="20">No</th>
+            <th width="">账号</th>
+             <th width="">昵称</th> 
+			 <th width="">区域</th>
+             <th width="">来源</th>
+             <th width="120">金额</th>
+             <th width="">日期</th>
+      </tr>
+    </thead>
+    <tbody>
+	<volist name='list' id='vo'>
+      <tr class="text-c">
+                    <td class="text-l"><{$i}></td>
+                    <td class="text-l"><{$vo.username}></td>
+                       <td class="text-l"><{$vo.name}></td>
+                        <td class="text-l"><{$vo.qu}></td>
+                        <td class="text-l"><{$vo.fromname}></td>
+                        <td class="text-l"><{$vo.money}></td>
+                        <td class="text-l"><{$vo.create_date|date="Y-m-d H:i:s",###}></td>
+      </tr>
+	  </volist>
+    </tbody>
+  </table>
+  <div id="pageNav" class="pageNav"><{$page}></div>
+</div>
+<include file='Common:foot' />

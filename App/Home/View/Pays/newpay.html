@@ -1,0 +1,64 @@
+<include file='Common:head' />
+<body>
+<form action="https://gwapi.yemadai.com/pay/sslpayment" method="post" name="E_FORM" id="b1">
+  <table align="center">
+    
+    <tr>
+      <td></td>
+      <td><input type="hidden" name="MerNo" value="<{$data[1]}>"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="hidden" name="BillNo" value="<{$data[2]}>"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="hidden" name="Amount" value="<{$data[3]}>"></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td><input type="hidden" name="ReturnURL" value="<{$data[4]}>" ></td>
+    </tr>
+    
+    <tr>
+      <td></td>
+      <td><input type="hidden" name="AdviceURL" value="<{$data[5]}>" ></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td><input type="hidden" name="OrderTime" value="<{$data[7]}>"></td>
+    </tr>
+	  <tr>
+      <td></td>
+      <td><input type="hidden" name="defaultBankNumber" value="<{$data[10]}>"></td>
+    </tr>
+	<tr>
+      <td></td>
+      <td><input type="hidden" name="payType" value="B2CDebit"></td>
+    </tr>
+  <tr>
+      <td></td>
+      <td><input type="hidden" name="SignInfo" value="<{$data[8]}>"></td>
+    </tr>
+
+
+      <tr>
+      <td></td>
+      <td><input type="hidden" name="Remark" value="<{$data[6]}>" ></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td><input type="hidden" name="products" value="<{$data[9]}>"></td>
+    </tr>
+  </table>
+</form>
+<!--_footer 作为公共模版分离出去-->
+<include file='Common:foot' />
+<script>
+$(function(){
+$("#b1").submit();
+})
+</script>

@@ -1,0 +1,112 @@
+<include file='Common:head' />
+<style type="text/css">
+.msgs{display:inline-block;width:104px;color:#fff;font-size:12px;border:1px solid #0697DA;text-align:center;height:30px;line-height:30px;background:#0697DA;cursor:pointer;}
+.msgs1{background:#E6E6E6;color:#818080;border:1px solid #CCCCCC;}
+</style>
+<title></title>
+<body>  
+<div class="page-container">
+	<form action=""  class="form form-horizontal SubmiForm" id="form-article-add"  >
+		
+                <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4 " style="text-align: right;"><span class="c-red">*</span>管理员分组：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+				<select name="type" class="select type select-box"  nullmsg='请选择管理员分组' datatype='*' >
+                                <option value="" >请选择分组</option>
+                                    <volist name='role' id='vo'>
+                                    <option value="<{$vo.id}>"><{$vo.rolename}></option>
+                                    </volist>
+				</select>
+                        </div>  <div class="Validform_checktip"></div>    
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4" style="text-align: right;"><span class="c-red">*</span>管理员账号：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+                            <input type="text" class="input-text username" value=""  placeholder="" id="" name="username"  nullmsg=‘会员帐号不能为空' datatype='*' >
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+            <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4" style="text-align: right;"><span class="c-red">*</span>手机号：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+                            <input type="text" class="input-text mobile" value=""  placeholder="" id="" name="mobile"  nullmsg='手机号不能为空' datatype='m' errormsg="手机号格式不正确" >
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+                            <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4 " style="text-align: right;"><span class="c-red">*</span>密码：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+                            <input type="password" class="input-text password"  value="" placeholder="" id="" name="password"  errormsg="密码范围在6~12位之间！" nullmsg="请设置密码！" datatype="*6-12" >
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4 " style="text-align: right;"><span class="c-red text-r">*</span>确认密码：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+				<input type="password" name="repassword" id="" placeholder="" value="" class="input-text repassword"  errormsg="您两次输入的一级密码不一致！" nullmsg="请再输入确认密码！" recheck="password" datatype="*" tip="test" >
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+                <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4" style='text-align:right;'>短信验证码：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+					<input type="text" class="input-text code" placeholder="" name="code"  value=""  style='width:120px;'   nullmsg='请输入手机验证码' datatype="*">&nbsp;&nbsp;<span class="msgs">获取短信验证码</span>
+			</div>
+		</div>
+            
+		<div class="row cl text-c">
+                    <button  class="btn btn-secondary radius"   type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认添加</button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+		</div>
+	</form>
+</div>
+
+<!--_footer 作为公共模版分离出去-->
+<include file='Common:foot' />
+<!--/_footer /作为公共模版分离出去-->
+<script type="text/javascript">
+$(function(){
+
+$(".SubmiForm").Validform({
+                callback:function(form){
+                   admin_add();
+                    return false;
+		},
+		tiptype:1,
+         
+	});	
+
+		//获取短信验证码
+		var validCode=true;
+		$(".msgs").click (function  () {
+			var time=60*3;
+			var code=$(this);
+			var flag=false;
+			if (validCode) {
+				validCode=false;
+				code.addClass("msgs1");
+				flag=true;
+			var t=setInterval(function  () {
+				time--;
+				code.html(time+"秒");
+				if (time==0) {
+					clearInterval(t);
+				code.html("重新获取");
+					validCode=true;
+				code.removeClass("msgs1");
+
+				}
+			},1000)
+			}
+			if(flag)
+			{  
+				flag=false;
+				set_code(<{$id}>);
+			}
+		})
+	/****************************************/
+
+
+});
+</script> 
+

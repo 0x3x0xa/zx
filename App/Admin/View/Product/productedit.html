@@ -1,0 +1,84 @@
+<include file='Common:head' />
+<title>编辑产品</title>
+<body>  
+<div class="page-container">
+	<form action=""  class="form form-horizontal SubmiForm" id="form-article-add"  >
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品名称：</label>
+			<div class="formControls col-xs-3 col-sm-4">
+                            <input type="hidden" name="id" value="<{$product_row.id}>">
+                            <input type="text" class="input-text product_title" value="<{$product_row.product_title}>" placeholder="" id="" name="product_title"   nullmsg='不能为空' datatype='*' >
+			</div>
+                        <div class="Validform_checktip"></div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品规格：</label>
+			<div class="formControls col-xs-3 col-sm-4">
+				<input type="text" class="input-text product_norms" value="<{$product_row.product_norms}>" placeholder="" id="" name="product_norms"  nullmsg='不能为空' datatype='*' >
+                        </div>
+                           <div class="Validform_checktip"></div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品类别：</label>
+			<div class="formControls col-xs-3 col-sm-4">
+                         
+				<select name="product_type" class="select product_type select-box"  nullmsg='不能为空' datatype='*' >
+                                <option value="" >请选择产品</option>
+				<volist name='list1' id='vo1'  > 
+                                <option value="<{$vo1.id}>" <if condition='$product_row["product_type"]  eq $vo1["id"]'>selected</if>><{$vo1.type_name|htmlspecialchars_decode=###}></option>
+                                </volist>
+				</select>
+			
+                           
+                        </div>  <div class="Validform_checktip"></div>
+                          
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>市场价：</label>
+			<div class="formControls col-xs-3 col-sm-4">
+                            <input type="text" class="input-text market_price" value="<{$product_row.market_price}>"  placeholder="" id="" name="market_price"  nullmsg='不能为空' datatype='*' >
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+                            <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>会员价：</label>
+			<div class="formControls col-xs-3 col-sm-4">
+                            <input type="text" class="input-text member_price"  value="<{$product_row.member_price}>" placeholder="" id="" name="member_price"  nullmsg='不能为空' datatype='*' >
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+
+                <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">产品描述：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+                            <textarea name="product_message" cols="" rows="" class="textarea product_message"  placeholder="说点什么...最少输入10个字符" dragonfly="true" onKeyUp="textarealength(this,200)"><{$product_row.product_message}></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                            <button  class="btn btn-secondary radius"   type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认添加</button>
+				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+<!--_footer 作为公共模版分离出去-->
+<include file='Common:foot' />
+<!--/_footer /作为公共模版分离出去-->
+<script type="text/javascript">
+$(function(){
+	  
+	$(".SubmiForm").Validform({
+                callback:function(form){
+                    product_edit_save(<{$product_row.id}>);
+                    return false;
+		},
+		tiptype:2,
+         
+	});	
+	
+	
+})
+</script>

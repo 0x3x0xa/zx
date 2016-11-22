@@ -1,0 +1,36 @@
+<include file='Common:head' />
+<title></title>
+</head>
+<body>
+    <div class="page-container">
+        <div class="mt-0">
+            <table class="table table-border table-bordered table-hover table-bg ">
+                <thead>
+                    <tr class="text-l">
+                        <th width="">会员账号</th>
+                         <th width="">订单号</th>
+                        <th width="">快递单号</th>
+                        <th width="">会员姓名 </th>
+                        <th width="">数量</th>
+                        <th width="200">备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name='list' id='vo'>
+                    <tr class="text-l">
+                   
+                        <td class="text-l"> <input type="checkbox" name="orderId" value='<{$vo.id}>'  checked="checked" style='display: none;'><{$vo.username}></td>
+                        <td class="text-l"><{$vo.order_eg}></td>
+                        <td class="text-l"><if condition='$vo.express_no eq "" '> <span style="color:red;"> 请填写快递单号再发货</span><else/><{$vo.express_no}></if></td>
+                        <td class="text-l"><{$vo.name}></td>
+                        <td class="text-l"><{$vo.total_num}></td>
+                        <td class="text-l"><input type="text" class="input-text message_<{$vo.id}>" value="<{$vo.message}>" placeholder="" id="" name="message" ></td>
+                    </tr>
+                </volist>
+
+                </tbody>
+            </table>  
+            <div id="pageNav" class="pageNav"><button class="btn btn-primary radius" type="button" onclick='order_fuhuo_save()'><i class="Hui-iconfont">&#xe669;</i> 发货</button></div>
+        </div>
+    </div>
+<include file='Common:foot' />

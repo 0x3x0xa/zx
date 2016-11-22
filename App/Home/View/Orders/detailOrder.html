@@ -1,0 +1,56 @@
+<include file='Common:head' />
+<title></title>
+</head>
+<body>
+    <div class="page-container">
+        <div class="mt-0">
+            <table class="table table-border table-bordered table-hover table-bg ">
+                <tbody>
+                    <tr class="text-c">
+                        <td class="text-r">订单号</td>    
+                        <td class="text-l"><{$row.order_eg}></td>
+                        <td class="text-r">状态</td>
+                        <td class="text-l"><if condition='$row.status eq 1'>已经付款<elseif condition="$row.status eq 2" />已经发货<elseif condition="$row.status eq 3" />已经收货</if></td>
+                    </tr>  
+                    <tr class="text-c">
+                        <td class="text-c">产品名称</td>
+                        <td class="text-c">数量</td>
+                        <td class="text-c">单价</td>
+                        <td class="text-c">合计</td>
+                    </tr>
+                    <volist name='list' id='vo'>
+                    <tr class="text-c">
+                        <td class="text-c"><{$vo.producttitle}></td>
+                        <td class="text-c"><{$vo.productnum}></td>
+                        <td class="text-c"><{$vo.productmoney}></td>
+                        <td class="text-c"><{$vo.producttotalmoney}></td>
+                    </tr>
+                    </volist>
+                      <tr class="text-c">
+                        <td class="text-c">总数量</td>
+                        <td class="text-c"><{$row.total_num}></td>
+                        <td class="text-c">总金额</td>
+                        <td class="text-c"><{$row.total_sum}></td>
+                    </tr> 
+                    <if condition='$row.status neq "1"' >
+                    <tr class="text-c">
+                        <td class="text-c">快递公司</td>
+                        <td class="text-c"><if condition='$expressInfo.title neq "" ' > <{$expressInfo.title}><else/> 暂无</if></td>
+                        <td class="text-c">快递单号</td>
+                        <td class="text-c"><if condition='$row.express_no neq "" ' > <{$row.express_no}><else/> 暂无</if></td>
+                    </tr>
+                    </if>
+                     <tr class="text-c">
+                        <td class="text-c">备注</td>
+                        <td class="text-c" colspan="3">
+                          <textarea name="message" cols="" rows="" class="textarea message"  dragonfly="true"><{$row.message}></textarea>
+			
+                        </td>
+                    </tr>
+                
+                </tbody>
+            </table>  
+            <div id="pageNav" class="pageNav"><button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;关闭&nbsp;&nbsp;</button></div>
+        </div>
+    </div>
+<include file='Common:foot' />

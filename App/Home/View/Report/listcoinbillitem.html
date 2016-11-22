@@ -1,0 +1,55 @@
+<include file='Common:head' />
+<title>会员列表</title>
+</head>
+<body>
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>财务中心 <span class="c-gray en">&gt;</span>电子积分 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="page-container">
+        <form method="get" action="__SELF__">
+            <div class="text-c"> 
+                <span class="select-box" style='width:130px;'>
+                    <select name="search_status"  class='select '  value=''>
+                        <option value="">类型</option>
+                        <option value="1" <if condition="$arr['search_status'] eq '1' "> selected</if>>收入</option>
+                        <option value="2" <if condition="$arr['search_status'] eq '2' "> selected</if>>支出</option>
+                    </select> 
+                </span>
+                日期范围：
+                <input type="text" onFocus="WdatePicker({maxDate: '#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" name='search_starttime' class="input-text Wdate" style="width:120px;" value="<{$arr['search_starttime']}>">
+                -
+                <input type="text" onFocus="WdatePicker({minDate: '#F{$dp.$D(\'datemin\')}', maxDate: '%y-%M-%d'})" name='search_endtime' id="datemax" class="input-text Wdate" style="width:120px;" value="<{$arr['search_endtime']}>">
+                <button type="submit" class="btn btn-success" id="" ><i class="Hui-iconfont">&#xe665;</i> 搜索</button> 
+
+            </div></form>
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="l" >
+            </span>  <span class="r">共有数据：<strong><{$count}></strong> 条</span> </div>
+        <div class="mt-0">
+            <table class="table table-border table-bordered table-hover table-bg ">
+                <thead>
+                    <tr class="text-c">
+                        <th width="">类型</th>
+                        <th width="">收入</th>
+                        <th width="">支出</th>
+                        <th width="">余额</th>
+                        <th width="">描述</th>
+                        <th width="120">时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name='list' id='vo'>
+                    <tr class="text-c">
+                        <td class="text-l"><if condition='$vo.status eq  "1" ' > 收入<else/> 支出</if></td>
+                        <td class="text-l"><{$vo.income}></td>
+                        <td class="text-l"><{$vo.expend}></td>
+                        <td class="text-l"><{$vo.balance}></td>
+                        <td class="text-l"><{$vo.message}></td>
+                        <td class="text-l"><{$vo.create_date|date='Y-m-d H:i:s',###}></td>
+                    </tr>
+                </volist>
+
+                </tbody>
+            </table>  
+            <div id="pageNav" class="pageNav"><{$page}></div>
+        </div>
+    </div>
+<include file='Common:foot' />

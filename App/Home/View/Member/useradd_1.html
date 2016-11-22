@@ -1,0 +1,313 @@
+<include file='Common:head' />
+
+<title>注册会员</title>
+</head>
+<body>
+<article class="page-container">
+	<form action="__SELF__" method="" class="form form-horizontal registerform" id="form-member-add">
+            {__TOKEN__} 
+            <fieldset style="border: 1px solid #56b4f3; border-radius: 9px;">
+            <legend style="margin-left: 50px; color: #fff; background-color: #56b4f3;width:80px;font-size: 12px;text-align: center; margin-bottom: 0px;height:25px;line-height: 25px;">个人资料</legend>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>会员账号：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+                            <input type="text" class="input-text username" value="<{$username}>" placeholder="" ajaxurl="<{:U('/Home/Member/check_input_unique')}>"  errormsg="会员账号格式不对" nullmsg="请输入会员账号！"  id="username" name="username"  datatype="u6-16" >
+                        </div><div><a title="刷新" href="javascript:location.replace(location.href);" style="line-height:1.6em;" class="btn btn-success radius l"><i class="Hui-iconfont"></i></a>&nbsp;&nbsp;
+                        </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;' ><span class="c-red">*</span>会员昵称：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+				<input type="text" class="input-text name" value="张三" placeholder="" id="name" name="name" errormsg="中文名为2~4个中文字符！" nullmsg="请输入中文名！" datatype="z2-4">
+			</div>
+                        
+                         <div class="Validform_checktip"></div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;' ><span class="c-red">*</span>一级密码：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+				<input type="text" class="input-text password" value="111111" placeholder="" id="password" name="password" errormsg="密码范围在6~16位之间！" nullmsg="请设置一级密码！" datatype="*6-16">
+			</div>
+                        <div class="Validform_checktip"></div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>确认一级密码：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+                            <input type="text" value="111111" class="input-text affirm_password" placeholder="" name="affirm_password" id="affirm_password" errormsg="您两次输入的一级密码不一致！" nullmsg="请再输入一次一级密码！" recheck="password" datatype="*" tip="test">
+			</div>
+                        <div class="Validform_checktip"></div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>二级密码：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+                            <input type="text" value="222222" class="input-text towpassword" placeholder="" name="towpassword" id="towpassword" errormsg="密码范围在6~16位之间！" nullmsg="请设置二级密码！" datatype="*6-16">
+			</div>
+                            <div class="Validform_checktip"></div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>确认二级密码：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+				<input type="text"  value='222222' class="input-text affirm_towpassword" placeholder="" name="affirm_towpassword" id="affirm_towpassword" errormsg="您两次输入的二级密码不一致！" nullmsg="请再输入一次二级密码！" recheck="towpassword" datatype="*" tip="test">
+			</div>
+                            <div class="Validform_checktip"></div>
+		</div>
+            	<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>三级密码：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+                            <input type="text" value="333333" class="input-text threepassword" placeholder="" name="threepassword" id="threepassword" errormsg="密码范围在6~16位之间！" nullmsg="请设置三级密码！" datatype="*6-16">
+			</div>
+                            <div class="Validform_checktip"></div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>确认三级密码：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+				<input type="text" value='333333' class="input-text affirm_threepassword" placeholder="" name="affirm_threepassword" id="affirm_threepassword" errormsg="您两次输入的三级密码不一致！" nullmsg="请再输入一次三级密码！" recheck="threepassword" datatype="*" tip="test">
+			</div>
+                            <div class="Validform_checktip"></div>
+		</div>
+                <div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>推荐人：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+				<input type="text" value='' class="input-text recommend" placeholder="" ajaxurl="<{:U('/Home/Member/check_input_recommend_exist')}>" name="recommend" id="recommend" errormsg="账号至少6个字符,最多18个字符！" nullmsg="请输入推荐人账号！" datatype="s6-18">
+			</div>
+                            <div class="Validform_checktip"></div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>接点人：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+                            <input type="text" value='<{$junctioninfo}>' class="input-text junction" placeholder="" ajaxurl="<{:U('/Home/Member/check_input_junction_exist')}>" name="junction" id="junction"errormsg="账号至少6个字符,最多18个字符！" nullmsg="请输入接点人账号！" datatype="s6-18">
+			</div>
+                            <div class="Validform_checktip"></div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>选择区域：</label>
+			<div class="formControls col-xs-7 col-sm-5 ">
+                          
+				<select class="select region select-box" size="1" name="region"  datatype="*" nullmsg="请选择区域" >
+                                    <option value=''>请选择区域</option>
+                                    <option value="0" <if condition="$region eq 0 "  > selected="selected" </if>>左区</option>
+                                    <option value="1" <if condition="$region eq 1 "  > selected="selected" </if>>中区</option>
+                                    <option value="2" <if condition="$region eq 2 "  > selected="selected" </if>>右区</option>
+				</select>
+				
+                        </div>  <div class="Validform_checktip"></div>
+                       
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>身份证：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+                            <input type="text" value="441481199208034853" class="input-text id_card" placeholder="" name="id_card" id="id_card" ajaxurl="<{:U('/Home/Member/check_input_unique')}>" errormsg="您填写的身份证号码不对！" nullmsg="请填写身份证号码！" datatype="idcard">
+			</div>
+                         <div class="Validform_checktip"></div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>手机号：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+                            <input type="text" value='15820733611' class="input-text mobile" placeholder="" ajaxurl="<{:U('/Home/Member/check_input_unique')}>" name="mobile" id="mobile" errormsg="手机号码格式不正确！"  nullmsg='请输入您的手机号码' datatype="m">
+			</div>
+                        <div class="Validform_checktip"></div>
+		</div>
+                <div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>性别：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+				<div class="radio-box">
+                                    <input name="sex" type="radio" id="sex-1" value="0" errormsg="请选择性别！" datatype="*"  checked="checked"> 
+					<label for="sex-1">男</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-2" name="sex" value="1">
+					<label for="sex-2">女</label>
+				</div>
+                           
+			</div>
+                          <div class="Validform_checktip"></div>
+		</div>
+            
+                <div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>邮政编码：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+                            <input type="text" class="input-text post_code" value="514500" placeholder="" name="post_code" id="post_code" errormsg="邮政编码格式不正确！"  nullmsg='请输入邮政编码' datatype="yb-6">
+			</div> <div class="Validform_checktip"></div>
+		</div>
+                <div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>所在地区：</label>
+                     
+			<div class="formControls ">
+                            <div class="formControls col-xs-7 col-sm-5 " id="region_container" >
+                            
+                            </div>
+                                 <div class="Validform_checktip"></div>
+			</div>
+                        
+		</div>
+                 <div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>详细地址：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+                            <input type="text" value="麦地路麦科特大厦" class="input-text detailed_address" placeholder="" name="detailed_address" id="detailed_address" errormsg="详细地址不正确！"  nullmsg='请输入详细地址' datatype="xxdz">
+			</div>
+                      <div class="Validform_checktip"></div>
+		</div>
+		
+            </fieldset>
+            <div style='height:20px;'></div>
+            <fieldset style="border: 1px solid #f09f2c; border-radius: 9px;">
+                <legend style="margin-left: 50px; color: #fff; background-color: #f09f2c;width:80px;font-size: 12px;text-align: center; margin-bottom: 0px;height:25px;line-height: 25px;">银行资料</legend>
+                <div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'>开户银行：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+                        
+				<select class="select bank select-box" size="1" name="bank"   datatype="*" nullmsg="请选择银行" >
+                                    <option value="">请选择银行</option>
+					<volist name='banklist' id='vo'>
+					 <option value="<{$vo.bankname}>"><{$vo.bankname}></option>
+					</volist>
+					</select>
+                        </div>
+                          <div class="Validform_checktip"></div>
+		</div>
+                <div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>开户姓名：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+                            <input type="text" value="习近平" class="input-text account_name" placeholder="" name="account_name" id="account_name" errormsg="中文名为2~4个中文字符！" nullmsg="请输入中文名！" datatype="z2-4">
+			</div>
+                        <div class="Validform_checktip"></div>
+		</div>
+                <div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>银行卡号：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+				<input type="text" value='6228480402564890011' class="input-text bankno" placeholder="" ajaxurl="<{:U('/Home/Member/check_input_unique')}>" name="bankno" id="bankno" errormsg="银行账号16-18个字符！" nullmsg="请输入银行账号！" datatype="yhno-16-19">
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+                <div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>银行网点：</label>
+			<div class="formControls col-xs-7 col-sm-5">
+                            <input type="text" value="河南岸分行" class="input-text bank_outlets" placeholder="" name="bank_outlets" id="bank_outlets" errormsg="银行网点不正确！"  nullmsg='请输入银行网点' datatype="xxdz">
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+            </fieldset>
+               <div style='height:20px;'></div>
+          
+               <div class="row cl">
+			<div class="col-xs-8 col-sm-4 col-xs-offset-4 col-sm-offset-5">
+                            <button class="btn btn-primary radius" type="submit" ><i class="Hui-iconfont">&#xe632;  </i>提交</button>
+			</div>
+		</div>
+	</form>
+</article>
+    
+    
+<include file='Common:foot' />
+<script type="text/javascript" src="__PUBLIC__/H-ui/lib/address/addre_area.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/H-ui/lib/address/address-select.min.js"></script>
+<script type="text/javascript">
+
+    
+$(function(){
+	
+        $.extend($.Datatype,{
+		"z2-4" : /^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/,
+               
+	});
+
+        
+	$(".registerform").Validform({
+                callback:function(form){
+			var check=confirm("您确定要提交表单吗？");
+			if(check){
+				user_add_save();
+			}
+			
+			return false;
+		},
+		tiptype:2,
+                datatype:{//传入自定义datatype类型【方式二】;
+			"z2-4" : /^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/,
+                        "yb-6":/[1-9]\d{5}(?!\d)/,
+                        "u6-16":/^[A-Za-z0-9]{6,12}$/,
+                        "yhno-16-19":/^(\d{16}|\d{19})$/,
+                        "xxdz":/^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+/,
+                        "idcard":function(gets,obj,curform,datatype){
+				//该方法由佚名网友提供;
+			
+				var Wi = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 ];// 加权因子;
+				var ValideCode = [ 1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2 ];// 身份证验证位值，10代表X;
+			
+				if (gets.length == 15) {   
+					return isValidityBrithBy15IdCard(gets);   
+				}else if (gets.length == 18){   
+					var a_idCard = gets.split("");// 得到身份证数组   
+					if (isValidityBrithBy18IdCard(gets)&&isTrueValidateCodeBy18IdCard(a_idCard)) {   
+						return true;   
+					}   
+					return false;
+				}
+				return false;
+				
+				function isTrueValidateCodeBy18IdCard(a_idCard) {   
+					var sum = 0; // 声明加权求和变量   
+					if (a_idCard[17].toLowerCase() == 'x') {   
+						a_idCard[17] = 10;// 将最后位为x的验证码替换为10方便后续操作   
+					}   
+					for ( var i = 0; i < 17; i++) {   
+						sum += Wi[i] * a_idCard[i];// 加权求和   
+					}   
+					valCodePosition = sum % 11;// 得到验证码所位置   
+					if (a_idCard[17] == ValideCode[valCodePosition]) {   
+						return true;   
+					}
+					return false;   
+				}
+				
+				function isValidityBrithBy18IdCard(idCard18){   
+					var year = idCard18.substring(6,10);   
+					var month = idCard18.substring(10,12);   
+					var day = idCard18.substring(12,14);   
+					var temp_date = new Date(year,parseFloat(month)-1,parseFloat(day));   
+					// 这里用getFullYear()获取年份，避免千年虫问题   
+					if(temp_date.getFullYear()!=parseFloat(year) || temp_date.getMonth()!=parseFloat(month)-1 || temp_date.getDate()!=parseFloat(day)){   
+						return false;   
+					}
+					return true;   
+				}
+				
+				function isValidityBrithBy15IdCard(idCard15){   
+					var year =  idCard15.substring(6,8);   
+					var month = idCard15.substring(8,10);   
+					var day = idCard15.substring(10,12);
+					var temp_date = new Date(year,parseFloat(month)-1,parseFloat(day));   
+					// 对于老身份证中的你年龄则不需考虑千年虫问题而使用getYear()方法   
+					if(temp_date.getYear()!=parseFloat(year) || temp_date.getMonth()!=parseFloat(month)-1 || temp_date.getDate()!=parseFloat(day)){   
+						return false;   
+					}
+					return true;
+				}
+				
+			}
+		}
+	});	
+	
+	
+})
+
+
+ var province, capital, city;
+        for (var i = 0; i < address_data[0].Province.length; i++) {
+            if (address_data[0].Province[i].Name == "") {
+                province = address_data[0].Province[i].Name;
+                for (var j = 0; j < address_data[0].Province[i].Capital.length; j++) {
+                    if (address_data[0].Province[i].Capital[j].Name == "") {
+                        city = address_data[0].Province[i].Capital[j].Name;
+                        for (var k = 0; k < address_data[0].Province[i].Capital[j].City.length; k++) {
+                            if (address_data[0].Province[i].Capital[j].City[k].Name == "") {
+                                capital = address_data[0].Province[i].Capital[j].City[k].Name;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        create_address_select('', 'region_container', 'Name', '广东省', '惠州市', '惠城区');
+</script> 

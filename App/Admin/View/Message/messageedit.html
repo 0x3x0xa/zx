@@ -1,0 +1,35 @@
+<include file='Common:head' />
+<title>查看/回复</title>
+</head>
+<body>
+<div class="pd-20">
+  <div class="Huiform">
+    <form action="__SELF__" method="post">
+      <table class="table table-bg">
+        <tbody>
+          <tr>
+            <th width="100" class="text-r"> 账号：</th>
+            <td><input type="text" style="width:300px" class="input-text" value="<{$userinfo.username}>" placeholder=""  ></td>
+          </tr>
+          <tr>
+            <th class="text-r">主题：</th>
+            <td><input type="text" style="width:300px" class="input-text" value="<{$message_row.subject}>" placeholder=""></td>
+          </tr>
+		  <tr>
+            <th class="text-r">内容：</th>
+            <td><textarea style="width:300px;height:100px;"><{$message_row.content}></textarea></td>
+          </tr>
+		  <tr>
+            <th class="text-r">回复：</th>
+            <td><textarea style="width:300px;height:100px;" name='reply' class='reply'><{$message_row.reply}></textarea></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><button  class="btn btn-primary radius" type="button" onclick='message_edit_save(<{$message_row.id}>)'><i class="Hui-iconfont">&#xe632;</i>  回 复</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+<include file='Common:foot' />

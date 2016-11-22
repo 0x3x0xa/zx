@@ -1,0 +1,48 @@
+<include file='common:head' />
+<title></title>
+</head>
+<body>
+<div class="pd-20">
+  <div class="Huiform">
+    <form action="__SELF__" method="post">
+      <table class="table table-bg">
+        <tbody>
+          <tr>
+            <th class="text-c">栏目：</th>
+            <td>
+				<span class="select-box" >
+				  <select  class='select pid' name="pid" size="1">
+					<option value="0">栏目标题</option>
+					<volist name='list1' id='vo1'>
+					<option value="<{$vo1.id}>">&nbsp;<{$vo1.name}></option>
+					<volist name='list2' id='vo2'>
+					<if condition='$vo1["id"] eq $vo2["pid"]'>
+					<option value="<{$vo2.id}>">&nbsp;├ <{$vo2.name}></option>
+					</if>
+					</volist>
+					</volist>
+				  </select>
+				</span>
+			</td>
+			</tr>
+			<tr>
+            <th  class="text-c">节点名称：</th>
+            <td><input type="text" class="input-text name"  placeholder=""  name="name"></td>
+          </tr>
+		  <tr>
+            <th class="text-c"> 字段名称：</th>
+            <td><input type="text" class="input-text control_action" placeholder=""  name="mobile"></td>
+          </tr>
+          </tr>
+          <tr>
+            <th></th>
+            <td>
+                <button type="button" class="btn btn-secondary radius" onclick='addadminpermission()'><i class="Hui-iconfont"></i> 确认添加</button>
+			</td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+<include file='common:foot' />

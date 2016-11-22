@@ -1,0 +1,49 @@
+<include file='Common:head' />
+<title>会员列表</title>
+</head>
+<body>
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>账户总览 <span class="c-gray en">&gt;</span>市场管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="page-container">
+        <form method="get" action="__SELF__">
+            <div class="text-c"> 
+                <input type="text" class="input-text" style="width:150px" placeholder="输入账号" id="" value="<{$username}>" name="username" >
+
+                <button type="submit" class="btn btn-success" id="" ><i class="Hui-iconfont">&#xe665;</i> 搜索</button> 只能搜索您的子节点
+
+            </div></form>
+<!--        <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="l" ></span> 
+            <span class="r"></span>
+        </div>-->
+        <div class="mt-20">
+            <table class="table table-border table-bordered table-hover table-bg ">
+                <thead>
+                    <tr class="text-c"> 
+                       <th width="">区域</th>
+                        <th width="">会员账号</th> 
+                        <th width="">昵称</th>
+                        <th width="">推荐人</th>
+                        <th width="">接点人</th>
+                        <th width="120">注册时间</th>
+                        <th width="100">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name='list' id='vo'>
+                    <tr class="text-c">
+                        <td class="text-c"><{$vo.regions}></td>
+                        <td><if condition='$vo["username"] neq "" ' ><u style="cursor:pointer" class="text-primary"><a href="<{:U('Home/Member/listpartner',array('username'=>$vo['username']))}>"><{$vo.username}></a></u><else/><a href="<{:U('Home/Member/useradd',array('username'=>$vo['junction'],'region'=>$vo['region']))}>">添加会员</a></if></td>
+                        <td class="text-l"><{$vo.name}></td>
+                        <td class="text-l"><{$vo.recommend}></td>
+                        <td class="text-l"><if condition='$vo["username"] neq "" ' ><{$vo.junction}></if></td>
+                        <td class="text-l"><if condition='$vo["username"] neq "" ' ><{$vo.regtime|date='Y-m-d H:i:s',###}></if></td>
+                        <td class="text-l"><if condition='$vo["username"] neq "" ' >详情</if></td>
+                    </tr>
+                </volist>
+
+                </tbody>
+            </table>  
+            <div id="pageNav" class="pageNav"><{$page}></div>
+        </div>
+    </div>
+<include file='Common:foot' />

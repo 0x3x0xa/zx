@@ -1,0 +1,25 @@
+﻿<include file='Common:head' />
+<title>公告管理</title>
+</head>
+<body>
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 通知公告 <span class="c-gray en">&gt;</span> 公告列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="page-container">
+        <!--        <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> </span> 
+                    <span class="r">共有数据：<strong><{$count}></strong> 条</span> </div>-->
+        <div class="mt-0">
+            <table class="table   table-hover table-bg ">
+
+                <tbody>
+                <volist name='list' id='vo' > 
+                    <tr class="text-l" style=" border-bottom: 1px dashed #a7a7a7; color: #a7a7a7;">
+                       <td> ● <a href="<{:U('Home/Article/articlezhang/',array('id'=>$vo['id']))}>">    <{$vo.art_title}></a></td>
+                        <td style='width:130px;'>    <{$vo.art_time|date='Y-m-d H:i:s',###}></td>
+                    </tr>
+                    </a>
+                </volist>
+                </tbody>
+            </table>  
+            <div id="pageNav" class="pageNav"><{$page}></div>
+        </div>
+    </div>
+<include file='Common:foot' />

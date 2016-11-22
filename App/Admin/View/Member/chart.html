@@ -1,0 +1,73 @@
+<include file='Common:head' />
+<title></title>
+</head>
+<body class="pos-r">
+    <div class="pos-a" style="width:100%;left:0;top:0; bottom:0; height:100%; border-right:1px solid #e5e5e5;">
+        <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>会员管理 <span class="c-gray en">&gt;</span>组织关系图 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+        <div class="cl pd-5 bg-1 bk-gray mt-0" >
+            <form action="__SELF__" method="get" class="search_from">
+                <span class="l" > 会员账号：
+                    <input type="text" class="input-text search_username" style="width:150px" placeholder="输入账号" id="search_username" <if  condition="$Think.get.search_username neq '' " >value="<{$Think.get.search_username}>" </if> name="search_username" nullmsg="请输入会员账号！"  datatype="*"  > 
+                       <select name="level" id="level"  onchange="selectLayer(this.value)" class='select' style='width:60px;height:31px;line-height:31px;'></span>
+                    <option value="3" <if condition='$arr["search_level"] eq "3" '>selected='selectde' <elseif condition="$Think.get.level eq '3'" /> selected='selectde'</if>>3层</option>
+                    <option value="4" <if condition='$arr["search_level"] eq "4" '>selected='selectde' <elseif condition="$Think.get.level eq '4'" /> selected='selectde'</if>>4层</option>
+                    <option value="5" <if condition='$arr["search_level"] eq "5" '>selected='selectde' <elseif condition="$Think.get.level eq '5'" /> selected='selectde'</if>>5层</option>
+                    <option value="6" <if condition='$arr["search_level"] eq "6" '>selected='selectde' <elseif condition="$Think.get.level eq '6'" /> selected='selectde'</if>>6层</option>
+                    <option value="7" <if condition='$arr["search_level"] eq  "7" '>selected='selectde' <elseif condition="$Think.get.level eq '7'" /> selected='selectde'</if>>7层</option>
+                    </select> </span>
+                      <span class="l" > 
+                      &nbsp;<button type="submit" class="btn btn-success" id="" onclick='' ><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+                      <button type="button" class="btn btn-success" id="" onclick='upperStory()' ><i class="Hui-iconfont">&#xe66b;</i> 上一层</button>
+                    </span>
+                <input type="hidden" name="layer" id="layer" value="<{$arr["search_level"]}>" />
+                       <input type="hidden" name="origin" id="origin" value="<{$arr['search_junction']}>" />        
+                <input type="hidden" name="error" id="error" value="" />&nbsp;&nbsp;
+            </form>
+        </div>
+        <ul id="org" style="display:none">
+            <li>
+            <{$html}>
+            </li>
+        </ul>
+        <div id="chart" class="orgChart"></div>
+    </div>
+<include file='Common:foot' />
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/H-ui/lib/Chart/css/jquery.jOrgChart.css" />
+<script type="text/javascript" src="__PUBLIC__/H-ui/lib/Chart/js/jquery.jOrgChart.js"></script>
+<script type="text/javascript">
+                    jQuery(document)
+                            .ready(
+                                    function () {
+                                        document.getElementById("level").value = document.getElementById("layer").value;
+
+                                        $("#org").jOrgChart({
+                                            chartElement: '#chart',
+                                            dragAndDrop: false
+                                        });
+
+                                    });
+                    function selectLayer(id) {
+                        var search_username=document.getElementById("search_username").value;
+                        if(search_username)
+                        {
+                        window.location.href = '/Admin/Member/chart/search_username/'+search_username+'/level/' + id;
+                        }
+                        else
+                        {
+                             window.location.href = '/Admin/Member/chart/level/' + id;
+                        }
+                    
+                    }
+                    function upperStory() {
+		var memberAccount = document.getElementById("origin").value;
+                var layer = document.getElementById("layer").value;
+		if (memberAccount != null && memberAccount != "") {
+			window.location.href = '/Admin/Member/chart/search_username/'+memberAccount+'/level/' + layer;
+		}
+
+	}
+
+
+</script>
+</body>
+</html>

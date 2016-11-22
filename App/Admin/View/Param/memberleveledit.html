@@ -1,0 +1,96 @@
+<include file='Common:head' />
+<title>修改注册等级</title>
+<body>  
+    <div class="page-container">
+        <form action=""  class="form form-horizontal SubmiForm" id="form-article-add"  >
+            <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4" style="text-align:right;"><span class="c-red">*</span>状态：</label>
+			<div class="formControls col-xs-3 col-sm-4 skin-minimal">
+				<div class="radio-box">
+                                    <input name="status" type="radio" id="sex-1" value="1" <if condition='$row.status eq 1' >checked</if> >
+					<label for="sex-1">开启</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-2" name="status" value="0"  <if condition='$row.status eq 0' >checked</if>>
+					<label for="sex-2">关闭</label>
+				</div>
+				
+			</div>
+		</div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>注册等级名：</label>
+                <div class="formControls col-xs-3 col-sm-4">
+                    <input type="hidden" name="id" value="<{$row.id}>">
+                    <input type="text" class="input-text title" value="<{$row.title}>" placeholder="" id="" name="title"   nullmsg='不能为空' datatype='*' >
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>注册金额：</label>
+                <div class="formControls col-xs-3 col-sm-4">
+                    <input type="text" class="input-text registermoney" value="<{$row.registermoney}>"  placeholder="" id="" name="registermoney"  nullmsg='不能为空' datatype='*' >
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>   
+            <!--		<div class="row cl">
+                                    <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>赠送积分比例 ：</label>
+                                    <div class="formControls col-xs-3 col-sm-4">
+                                            <input type="text" name="stockrate" id="" placeholder="" value="<{$row.stockrate}>" class="input-text stockrate"  nullmsg='不能为空' datatype='*' >
+                                    </div>
+                                       <div class="Validform_checktip"></div>
+                            </div>-->
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>市场日封顶：</label>
+                <div class="formControls col-xs-3 col-sm-4">
+                    <input type="text" name="daycap" id="" placeholder="" value="<{$row.daycap}>" class="input-text daycap"  nullmsg='不能为空' datatype='*' >
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>小市场比例：</label>
+                <div class="formControls col-xs-3 col-sm-4">
+                    <input type="text" name="minmarketplace" id="" placeholder="" value="<{$row.minmarketplace}>" class="input-text minmarketplace"  nullmsg='不能为空' datatype='*' >
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>中市场比例：</label>
+                <div class="formControls col-xs-3 col-sm-4">
+                    <input type="text" name="middlemarketplace" id="" placeholder="" value="<{$row.middlemarketplace}>" class="input-text middlemarketplace"  nullmsg='不能为空' datatype='*' >
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>溢价积分释放比例：</label>
+                <div class="formControls col-xs-3 col-sm-4">
+                    <input type="text" name="zhengzhiplace" id="" placeholder="" value="<{$row.zhengzhiplace}>" class="input-text zhengzhiplace"  nullmsg='不能为空' datatype='*' >
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+
+
+
+            <div class="row cl text-c">
+
+                <button  class="btn btn-secondary radius"   type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认修改</button>
+                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+
+            </div>
+        </form>
+    </div>
+
+    <!--_footer 作为公共模版分离出去-->
+<include file='Common:foot' />
+<!--/_footer /作为公共模版分离出去-->
+<script type="text/javascript">
+    $(function(){
+
+    $(".SubmiForm").Validform({
+    callback:function(form){
+    memberlevel_edit_save(<{$row.id}>);
+    return false;
+    },
+            tiptype:2,
+   });
+    })
+</script>

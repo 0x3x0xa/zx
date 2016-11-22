@@ -1,0 +1,56 @@
+<include file='Common:head' />
+<title>奖金收支明细</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务中心 <span class="c-gray en">&gt;</span>奖金提现列表  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<form method="get" action="__SELF__">
+<div class="pd-20">
+  <div class="text-c">
+      
+    日期范围：<input type="text" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" name='search_starttime' class="input-text Wdate" style="width:120px;" value="<{$arr['search_starttime']}>">
+    -
+    <input type="text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" name='search_endtime' id="datemax" class="input-text Wdate" style="width:120px;" value="<{$arr['search_endtime']}>">
+    <button type="submit" class="btn btn-success" id="" ><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+
+  </div>
+  </form>
+  <div class="cl pd-5 bg-1 bk-gray mt-20">
+      <span class="l"> 
+          <button type="button" class="btn btn-success excel" id="" onClick="showPage('600','550','添加提现','<{:U('Report/addWithdrawals')}>')" href="javascript:;" ><i class="Hui-iconfont">&#xe600;</i> 添加提现</button>
+<!--           <button type="button" class="btn btn-success excel" id="" onClick="showPage('600','350','合并到动态钱包','<{:U('Report/mergedongtaimoney')}>')" href="javascript:;" ><i class="Hui-iconfont">&#xe63a;</i> 合并到动态钱包</button>
+           <button type="button" class="btn btn-success excel" id="" onClick="showPage('600','350','合并到静态钱包','<{:U('Report/mergejingtaimoney')}>')" href="javascript:;" ><i class="Hui-iconfont">&#xe63a;</i> 合并到静态钱包</button>-->
+      </span>
+    <span class="r">共有数据：<strong><{$count}></strong> 条</span>
+  </div>
+  <table class="table table-border table-bordered table-hover table-bg table-sort">
+    <thead>
+      <tr class="text-c">
+       
+        <th width="30">ID</th>
+	<th width="80">账号</th>
+	<th width="100">积分类型</th>
+        <th width="70">提现金额</th>
+        <th width="">手续费</th>
+        <th width="">实际支出金额</th>
+         <th width="">状态</th>
+        <th width="120">创建日期</th>
+      </tr>
+    </thead>
+    <tbody>
+	<volist name='list' id='vo'>
+      <tr class="text-c">
+        <td><{$i}></td>
+	<td><{$vo.username}></td>
+	<td><{$type[$vo['type']]}></td>
+        <td><{$vo.money}></td> 
+        <td><{$vo.poundage}></td>
+	<td class="text-l"><{$vo.truemoney}></td>
+        <td class="text-l"><{$status[$vo['status']]}></td>
+        <td class="user-status"><{$vo.create_date|date='Y-m-d H:i:s',###}></td>
+      </tr>
+	  </volist>
+    </tbody>
+  </table>
+  <div id="pageNav" class="pageNav"><{$page}></div>
+</div>
+<include file='Common:foot' />

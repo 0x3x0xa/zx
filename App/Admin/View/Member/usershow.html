@@ -1,0 +1,115 @@
+<include file='Common:head' />
+<title>会员查看</title>
+</head>
+<body>
+    <div class="cl pd-20" style=" background-color:#5bacb6">
+        <img class="avatar avatar-XL l" src="__PUBLIC__/H-ui/static/h-ui/images/user.png">
+        <dl style="margin-left:80px; color:#fff">
+            <dt><span class="f-18">账号：<{$userInfo.username}></span> <!--<span class="pl-10 f-12">推荐人：<{$member_row.recommend}></span>--></dt>
+            <dd class="pt-10 f-12" style="margin-left:0"></dd>
+        </dl>
+    </div>
+    <div class="pd-20">
+        <table class="table">
+            <tbody> 
+                <tr>
+                    <th class="text-r" width="200">市场积分：</th>
+                    <td><{$userInfo.allbonus}></td>
+                </tr>
+                <tr>
+                    <th class="text-r" width="200">活动积分：</th>
+                    <td><{$userInfo.alljingtaibonus}></td>
+                </tr>
+                 <tr>
+                    <th class="text-r" width="200">现金积分：</th>
+                    <td><{$userInfo.cash}></td>
+                </tr>
+                <tr>
+                    <th class="text-r" width="200">开发奖：</th>
+                    <td><{$userInfo.lingdaobonus}></td>
+                </tr>
+                  <tr>
+                    <th class="text-r" width="200">红包奖：</th>
+                    <td><{$userInfo.hongbaobonus}></td>
+                </tr>
+                 <tr>
+                    <th class="text-r" width="200">领导奖：</th>
+                    <td><{$userInfo.daishubonus}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">管理奖：</th>
+                    <td><{$userInfo.guanlibonus}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">晋级奖：</th>
+                    <td><{$userInfo.jinjibonus}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">全球分红：</th>
+                    <td><{$userInfo.quanqiufenhongbonus}></td>
+                </tr>
+                                <tr>
+                    <th class="text-r">月薪奖：</th>
+                    <td><{$userInfo.yuexinbonus}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">溢价积分：</th>
+                    <td><{$userInfo.zengzhibonus}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">分红积分：</th>
+                    <td><{$userInfo.fenhongbonus}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">电子积分：</th>
+                    <td class="text-l"><{$userInfo.dianzimoney}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">购物卷：</th>
+                    <td class="text-l"><{$userInfo.gouwujuan}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">购物积分：</th>
+                    <td class="text-l"><{$userInfo.gouwujifen}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">个人所得税：</th>
+                    <td class="text-l"><{$userInfo.gerensuodeshui}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">旅游基金：</th>
+                    <td class="text-l"><{$userInfo.lvyoubonus}></td>
+                </tr>     
+                <tr>
+                    <th class="text-r">名车基金：</th>
+                    <td class="text-l"><{$userInfo.mingchebonus}></td>
+                </tr>       
+                <tr>
+                    <th class="text-r">别墅基金：</th>
+                    <td class="text-l"><{$userInfo.bieshubonus}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">重消积分：</th>
+                    <td class="text-l"><{$userInfo.chongfuxiaofei}></td>
+                </tr>
+                  <tr>
+                    <th class="text-r">月薪奖池：</th>
+                    <td class="text-l"><{$userInfo.chendianchi}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">赠送积分：</th>
+                    <td class="text-l"><{$userInfo.integral}></td>
+                </tr>
+
+                <tr>
+                    <th class="text-r">登录次数：</th>
+                    <td><{$userInfo.lognum}></td>
+                </tr>
+                <tr>
+                    <th class="text-r">登录ip：</th>
+                    <td><{$userInfo.logip}></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<include file='Common:foot' />

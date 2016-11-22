@@ -1,0 +1,93 @@
+<include file='Common:head' />
+<title></title>
+<body>  
+    <div class="page-container">
+        <form action=""  class="form form-horizontal SubmiForm" id="form-article-add"  >
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4" style="text-align: right;">银行账号：</label>
+                <div class="formControls col-xs-5 col-sm-4">
+                    <{$userInfo.bankno}>
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">户主：</label>
+                <div class="formControls col-xs-5 col-sm-4">
+                    <{$userInfo.account_name}>
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-4" style="text-align: right;" >提现种类：</label>
+                        <div class="formControls col-xs-5 col-sm-4">
+                            <span class="select-box" >
+                                <select name="bizhong"  class='select bizhong'  value='' nullmsg='不能为空' datatype='*'>
+                                    <option value="">选择钱包</option>
+                                   <foreach name="type" item="vo">
+                                    <option value="<{$key}>"><{$vo}></option>
+                                    </foreach>
+                                </select> 
+                            </span>
+                        </div>
+                    </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">申请提现金额：</label>
+                <div class="formControls col-xs-5 col-sm-4">
+                    <input type="text" name="money"  onchange="zhiChuJinE_new(this.value)" placeholder="" value="" class="input-text money"  nullmsg='不能为空' datatype='*' >
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4" style="text-align: right;">提现手续费：</label>
+                <div class="formControls col-xs-5 col-sm-4 " id="serviceCharge">
+
+                </div>
+
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">实际支出金额：</label>
+                <div class="formControls col-xs-5 col-sm-4 " id="zhiChujiangjin">
+
+                </div>
+
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">三级密码：</label>
+                <div class="formControls col-xs-5 col-sm-4">
+                    <input type="password" name="threepassword" id="" placeholder="" value="" class="input-text threepassword"  nullmsg='不能为空' datatype='*' >
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl text-c">
+                <button  class="btn btn-secondary radius"   type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认提现</button>
+                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </form>
+    </div>
+
+    <!--_footer 作为公共模版分离出去-->
+<include file='Common:foot' />
+<!--/_footer /作为公共模版分离出去-->
+<script type="text/javascript">
+    $(function () {
+
+        $(".SubmiForm").Validform({
+            callback: function (form) {
+                addWithdrawals();
+                return false;
+            },
+            tiptype: 2,
+        });
+
+
+    })
+    function zhiChuJinE_new(money) {
+        var shouXufei = parseFloat("<{$data['tixian']}>");//手续费率
+        var shouXufeiCoin = (money * shouXufei).toFixed(2);//手续费
+        document.getElementById("serviceCharge").innerHTML = shouXufeiCoin;
+        var coin = (parseFloat(money) + parseFloat(shouXufeiCoin)).toFixed(2);
+        document.getElementById("zhiChujiangjin").innerHTML = coin;
+    }
+</script>

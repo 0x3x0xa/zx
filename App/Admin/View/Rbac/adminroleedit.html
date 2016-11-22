@@ -1,0 +1,58 @@
+<include file='Common:head' />
+<title>编辑分组</title>
+</head>
+<body>
+<div class="pd-20">
+  <form class="Huiform" >
+    <table class="table table-border table-bordered table-bg">
+      <tbody>
+        <tr>
+          <th class="text-r" width="80">分组名称：</th>
+		  <input name='id' value='<{$id}>' type='hidden' class='id'>
+          <td><input name="rolename" type="text" class="input-text rolename" id="" value="<{$role_row.rolename}>" datatype="*1-20" nullmsg="分组名称不能为空！"> 
+          </td>
+        </tr>
+        <tr>
+          <th class="text-r va-t" >权限分配：</th>
+          <td>
+            <table class="table table-border table-bordered table-bg">
+              <tbody>
+			  <volist name='list1' id='vo1'> 
+			  <tr>
+				<td  colspan='2'  style='font-weight:bold;font-size:13px;color:red;'><input name="power_id[]" type="checkbox" value="<{$vo1.id}>"   <?php if(in_array($vo1['id'],$role)){?>checked=checked<?php }?>  >&nbsp;&nbsp;<{$vo1.name}></td>
+			  </tr>
+			  <volist name='list2' id='vo2'>
+			  <if condition='$vo2[pid] eq $vo1[id]'>
+                <tr>
+					<th style='color:rgb(83, 1, 119);width: 100px;'><input name="power_id[]" type="checkbox" value="<{$vo2.id}>"  <?php if(in_array($vo2['id'],$role)){?>checked=checked<?php }?> >&nbsp;&nbsp; <{$vo2.name}></th>
+					<td class="permission-list" >
+					<div class="cl">
+					<volist name='list3' id='vo3'>
+					<if condition='$vo3[pid] eq $vo2[id]'>
+                    <label class="item"><input name="power_id[]" type="checkbox" value="<{$vo3.id}>" <?php if(in_array($vo3['id'],$role)){?>checked=checked<?php }?> >&nbsp;&nbsp; <{$vo3.name}></label>
+					</if>
+					</volist>
+                    </div>
+					</td>
+                </tr>
+				</if>
+				</volist>
+               </volist>
+        <tr>
+          <th class="text-r va-t">描述：</th>
+          <td><textarea name="remarks" class="textarea remarks" id="newpassword" placeholder="描述下该分组所具有的权限" style="width:400px; height:50px; resize:none"><{$role_row.remarks}></textarea> 
+          </td>
+        </tr>
+        
+        <tr>
+          <th></th>
+          <td>
+           
+			 <button type="button" class="btn btn-secondary radius" onclick='admin_role_edit_save()' ><i class="Hui-iconfont"></i> 确认修改</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+<include file='Common:foot' />

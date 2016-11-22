@@ -1,0 +1,262 @@
+<include file='Common:head' />
+<title>会员查看</title>
+</head>
+<body>
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 基本信息 <span class="c-gray en">&gt;</span> 个人信息 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<form action="__SELF__" method="post" class="form form-horizontal userinfo" id="form-member-add">
+              
+    <div class="pd-20">
+        <table class="table  table-border table-bordered table-hover table-bg">
+            <tbody> 
+                <tr>
+                    <th class="text-r" style="width:30%">账号：</th>
+                    <td class="text-l" style="width:70%"><{$userInfo.username}></td>
+                </tr>
+                <tr>
+                    <th class="text-r" style="width:30%">昵称：</th>
+                    <td class="text-l" style="width:70%"><{$userInfo.name}></td>
+                </tr>
+
+                <tr>
+                    <th class="text-r" style="width:30%">会员等级：</th>
+                    <td class="text-l" style="width:70%"><{$level.title}></td>
+                </tr>
+
+               <tr>
+                    <th class="text-r" style="width:30%">手机号码：</th>
+                    <td class="text-l" style="width:70%"><{$userInfo.mobile}></td>
+                </tr>
+            <if condition="$userInfo.saveinfonum eq '0' " >
+            {__TOKEN__} 
+            <tr>
+                <th class="text-r" style="width:30%">身份证：</th>
+                <td class="text-l" style="width:70%">
+                   
+	 <input type="text" value=" <{$userInfo.id_card}>" class="input-text id_card" placeholder="" name="id_card" id="id_card" errormsg="您填写的身份证号码不对！" nullmsg="请填写身份证号码！" datatype="idcard">
+			
+                    </td>
+            </tr>
+            <tr>
+                <th class="text-r" style="width:30%">邮政编码：</th>
+                <td class="text-l" style="width:70%">
+                    <input type="text" class="input-text post_code" value="  <{$userInfo.post_code}>" placeholder="" id="post_code" name="post_code" errormsg="邮政编码格式不正确！"  nullmsg='请输入邮政编码' datatype="yb-6">
+	
+                  </td>
+            </tr>
+            <tr>
+                <th class="text-r" style="width:30%">所在地区：</th>
+                <td class="text-l" style="width:70%">  
+			<div class="formControls ">
+                            <div class="formControls col-xs-7 " id="region_container" >
+                            
+                            </div>
+                                 <div class="Validform_checktip"></div>
+			</div>
+                        
+		</td>
+                
+            </tr>
+            <tr>
+                <th class="text-r" style="width:30%">详细地址：</th>
+                <td class="text-l" style="width:70%">
+                      <input type="text"  class="input-text detailed_address" placeholder="" value="<{$userInfo.detailed_address}>" name="detailed_address" id="detailed_address" errormsg="详细地址不正确！"  nullmsg='请输入详细地址' datatype="xxdz">
+		</td>
+            </tr>
+            <tr>
+                <th class="text-r" style="width:30%">开户银行：</th>
+                <td class="text-l" style="width:70%">
+                    <select class="select bank select-box" size="1" name="bank"   datatype="*" nullmsg="请选择银行" style="width:30%">
+                    <option value="">请选择银行</option>
+                        <volist name='banklist' id='vo'>
+                            <option value="<{$vo.bankname}>" <if condition="$vo['bankname'] eq  $userInfo['bank'] " >selected</if> ><{$vo.bankname}></option>
+                        </volist>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="text-r" style="width:30%">开户姓名：</th>
+                <td class="text-l" style="width:70%">
+                       <input type="text" class="input-text account_name" value="  <{$userInfo.account_name}>" placeholder="" id="account_name" name="account_name" errormsg="中文名为2~4个中文字符！" nullmsg="请输入中文名！" datatype="z2-4">
+	
+                  </td>
+            </tr>
+            <tr>
+                <th class="text-r" style="width:30%">银行卡号：</th>
+                <td class="text-l" style="width:70%">
+                      <input type="text" class="input-text bankno" value="  <{$userInfo.bankno}>" placeholder="" id="bankno" name="bankno" errormsg="银行账号16或19个字符！" nullmsg="请输入银行账号！" datatype="yhno-16-19">
+	
+                  </td>
+            </tr> 
+            <tr>
+                <th class="text-r" style="width:30%">银行网点：</th>
+                <td class="text-l" style="width:70%">
+                 <input type="text" class="input-text bank_outlets" value="<{$userInfo.bank_outlets}>" placeholder="" id="bank_outlets" name="bank_outlets" errormsg="" nullmsg="请设置银行网点！" datatype="*">
+	
+                </td>
+            </tr>
+             <tr>
+              
+                 <td class="text-c" style="width:70%" colspan="2"> <button type="submit" class="btn btn-success excel" id="" onclick='' >修改个人信息</button></td>
+            </tr>
+            <else/>
+               <tr>
+                <th class="text-r" style="width:30%">身份证：</th>
+                <td class="text-l" style="width:70%">
+                   <{$userInfo.id_card}>
+
+			
+                    </td>
+            </tr>
+            <tr>
+                <th class="text-r" style="width:30%">邮政编码：</th>
+                <td class="text-l" style="width:70%"> 
+                    <{$userInfo.post_code}>
+                  </td>
+            </tr>
+            <tr>
+                <th class="text-r" style="width:30%">所在地区：</th>
+                <td class="text-l" style="width:70%">  
+                    <{$userInfo.province}>&nbsp;<{$userInfo.city}>&nbsp;<{$userInfo.area}>  
+		</td>
+                
+            </tr>
+            <tr>
+                <th class="text-r" style="width:30%">详细地址：</th>
+                <td class="text-l" style="width:70%">
+                    <{$userInfo.detailed_address}>
+		</td>
+            </tr>
+            <tr>
+                <th class="text-r" style="width:30%">开户银行：</th>
+                <td class="text-l" style="width:70%">
+                    <{$userInfo['bank']}>
+                </td>
+            </tr>
+            <tr>
+                <th class="text-r" style="width:30%">开户姓名：</th>
+                <td class="text-l" style="width:70%">
+                    <{$userInfo.account_name}>
+                  </td>
+            </tr>
+            <tr>
+                <th class="text-r" style="width:30%">银行卡号：</th>
+                <td class="text-l" style="width:70%"> 
+                    <{$userInfo.bankno}>
+                  </td>
+            </tr> 
+            <tr>
+                <th class="text-r" style="width:30%">银行网点：</th>
+                <td class="text-l" style="width:70%"><{$userInfo.bank_outlets}>
+                </td>
+            </tr>
+            </if>
+            </tbody>
+        </table>
+    </div>
+        </form>
+<include file='Common:foot' />
+<script type="text/javascript" src="__PUBLIC__/H-ui/lib/address/addre_area.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/H-ui/lib/address/address-select.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+        $.extend($.Datatype,{
+		"z2-4" : /^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/,
+               
+	});
+
+        
+	$(".userinfo").Validform({
+                callback:function(form){
+			userinfo();
+			return false;
+		},
+		tiptype:1,
+                datatype:{//传入自定义datatype类型【方式二】;
+			"z2-4" : /^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/,
+                        "yb-6":/[1-9]\d{5}(?!\d)/,
+                        "u6-16":/^[A-Za-z0-9]{6,12}$/,
+                        "yhno-16-19":/^(\d{16}|\d{19})$/,
+                        "xxdz":/^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+/,
+                        "idcard":function(gets,obj,curform,datatype){
+				//该方法由佚名网友提供;
+			
+				var Wi = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 ];// 加权因子;
+				var ValideCode = [ 1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2 ];// 身份证验证位值，10代表X;
+			
+				if (gets.length == 15) {   
+					return isValidityBrithBy15IdCard(gets);   
+				}else if (gets.length == 18){   
+					var a_idCard = gets.split("");// 得到身份证数组   
+					if (isValidityBrithBy18IdCard(gets)&&isTrueValidateCodeBy18IdCard(a_idCard)) {   
+						return true;   
+					}   
+					return false;
+				}
+				return false;
+				
+				function isTrueValidateCodeBy18IdCard(a_idCard) {   
+					var sum = 0; // 声明加权求和变量   
+					if (a_idCard[17].toLowerCase() == 'x') {   
+						a_idCard[17] = 10;// 将最后位为x的验证码替换为10方便后续操作   
+					}   
+					for ( var i = 0; i < 17; i++) {   
+						sum += Wi[i] * a_idCard[i];// 加权求和   
+					}   
+					valCodePosition = sum % 11;// 得到验证码所位置   
+					if (a_idCard[17] == ValideCode[valCodePosition]) {   
+						return true;   
+					}
+					return false;   
+				}
+				
+				function isValidityBrithBy18IdCard(idCard18){   
+					var year = idCard18.substring(6,10);   
+					var month = idCard18.substring(10,12);   
+					var day = idCard18.substring(12,14);   
+					var temp_date = new Date(year,parseFloat(month)-1,parseFloat(day));   
+					// 这里用getFullYear()获取年份，避免千年虫问题   
+					if(temp_date.getFullYear()!=parseFloat(year) || temp_date.getMonth()!=parseFloat(month)-1 || temp_date.getDate()!=parseFloat(day)){   
+						return false;   
+					}
+					return true;   
+				}
+				
+				function isValidityBrithBy15IdCard(idCard15){   
+					var year =  idCard15.substring(6,8);   
+					var month = idCard15.substring(8,10);   
+					var day = idCard15.substring(10,12);
+					var temp_date = new Date(year,parseFloat(month)-1,parseFloat(day));   
+					// 对于老身份证中的你年龄则不需考虑千年虫问题而使用getYear()方法   
+					if(temp_date.getYear()!=parseFloat(year) || temp_date.getMonth()!=parseFloat(month)-1 || temp_date.getDate()!=parseFloat(day)){   
+						return false;   
+					}
+					return true;
+				}
+				
+			}
+		}
+	});	
+	
+	
+})
+
+
+ var province, capital, city;
+        for (var i = 0; i < address_data[0].Province.length; i++) {
+            if (address_data[0].Province[i].Name == "") {
+                province = address_data[0].Province[i].Name;
+                for (var j = 0; j < address_data[0].Province[i].Capital.length; j++) {
+                    if (address_data[0].Province[i].Capital[j].Name == "") {
+                        city = address_data[0].Province[i].Capital[j].Name;
+                        for (var k = 0; k < address_data[0].Province[i].Capital[j].City.length; k++) {
+                            if (address_data[0].Province[i].Capital[j].City[k].Name == "") {
+                                capital = address_data[0].Province[i].Capital[j].City[k].Name;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        create_address_select('', 'region_container', 'Name', '<{$userInfo.province}>', '<{$userInfo.city}>', '<{$userInfo.area}>');
+</script> 

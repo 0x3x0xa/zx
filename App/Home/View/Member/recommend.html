@@ -1,0 +1,49 @@
+<include file='Common:head' />
+<title>会员列表</title>
+</head>
+<body>
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>财务中心 <span class="c-gray en">&gt;</span>我的客户<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="page-container">
+        <form method="get" action="__SELF__">
+            <div class="text-c"> 
+
+                日期范围：
+                <input type="text" onFocus="WdatePicker({maxDate: '#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" name='search_starttime' class="input-text Wdate" style="width:120px;" value="<{$arr['search_starttime']}>">
+                -
+                <input type="text" onFocus="WdatePicker({minDate: '#F{$dp.$D(\'datemin\')}', maxDate: '%y-%M-%d'})" name='search_endtime' id="datemax" class="input-text Wdate" style="width:120px;" value="<{$arr['search_endtime']}>">
+                <button type="submit" class="btn btn-success" id="" ><i class="Hui-iconfont">&#xe665;</i> 搜索</button> 
+
+            </div></form>
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="l" >
+            </span>  <span class="r">共有数据：<strong><{$count}></strong> 条</span> </div>
+        <div class="mt-0">
+            <table class="table table-border table-bordered table-hover table-bg ">
+                <thead>
+                    <tr class="text-c">
+                        <th width="">No</th>
+                        <th width="">账号</th>
+                        <th width="">昵称</th>
+                        <th width="">级别</th>
+                        <th width="">注册时间</th>
+                        <th width="">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name='list' id='vo'>
+                    <tr class="text-c"> 
+                        <td class="text-c"><{$i}></td>
+                        <td class="text-c"><{$vo.username}></td>
+                        <td class="text-c"><{$vo.name}></td>
+                        <td class="text-c"><{$vo.level}></td>
+                        <td class="text-c" style="width:120px;"><{$vo.regtime|date="Y-m-d H:i:s",###}></td>
+                        <td class="text-c" style="width:100px;"> <if  condition='$vo.junction eq "-1" ' ><a  style="color: #367cb7;;" href="javascript:void(0);" onclick="showPage('600', '280', '会员升级', '<{:U("Home/Member/reupgrade",array('username'=>$vo['username']))}>')">会员升级</a> <a style="color: #367cb7;;" href='javascript:;'  onclick="del('<{$vo['username']}>')" >删除</a><else/>已完成</if></td>
+                    </tr>
+                </volist>
+
+                </tbody>
+            </table>  
+            <div id="pageNav" class="pageNav"><{$page}></div>
+        </div>
+    </div>
+<include file='Common:foot' />

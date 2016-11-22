@@ -1,0 +1,31 @@
+<include file='Common:head' />
+<title></title>
+</head>
+<body>
+    <div class="page-container">
+        <div class="mt-0">
+            <table class="table table-border table-bordered table-hover table-bg ">
+                <thead>
+                    <tr class="text-l">
+                        <th width="">时间</th>
+                         <th width="">地点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name='list' id='vo' empty='暂无物流信息'>
+                    <tr class="text-l" >
+                        <td class="text-l"><{$vo.ftime}></td><td class="text-l"><{$vo.context}></td>
+                    </tr>
+                </volist>
+				<if condition="$status eq '403' " >
+				<tr class="text-l" >
+                        <td class="text-l" >快递公司参数异常：单号格式错误</td>
+                    </tr>
+				</if>
+
+                </tbody>
+            </table>  
+            <div id="pageNav" class="pageNav"><button type="button" class="btn btn-default radius" onclick="layer_close();">&nbsp;&nbsp;关闭&nbsp;&nbsp;</button></div>
+        </div>
+    </div>
+<include file='Common:foot' />

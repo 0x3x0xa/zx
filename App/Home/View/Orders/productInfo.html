@@ -1,0 +1,100 @@
+<include file='Common:head' />
+<link rel="stylesheet" href="__STYLE__/home/ShopShow.css" type="text/css" />
+<link rel="stylesheet" href="__STYLE__/home/MagicZoom.css" type="text/css" />
+<script src="__JS__/home/MagicZoom.js" type="text/javascript"></script>
+<title></title>
+</head>
+<body>
+    <div class="page-container">
+        <div class="mt-0">
+            <table class="table table-border table-bordered  table-bg ">
+                <tbody>
+                    <tr class="text-c">
+                        <td class="text-l"  colspan="2" style='width:50%;' >
+                            <div id="tsShopContainer">
+                                <div id="tsImgS"><a href="/<{$row.image_path}>" title="产品图片" class="MagicZoom" id="MagicZoom"><img width="300" height="300" src="/<{$row.image_path_middle}>" /></a></div>
+                                <div id="tsPicContainer">
+                                    <div id="tsImgSArrL" onclick="tsScrollArrLeft()"></div>
+                                    <div id="tsImgSCon">
+                                        <ul>
+                                            <volist name='list' id='vo' >
+                                                <li onclick="showPic( < {$key} > )" rel="MagicZoom"  <if condition="$key eq '0' " >class="tsSelectImg" </if>><img height="42" width="42" src="/<{$vo.image_path_middle}>" tsImgS="/<{$vo.image_path}>" /></li>
+                                            </volist>
+                                        </ul>
+                                    </div>
+                                    <div id="tsImgSArrR" onclick="tsScrollArrRight()"></div>
+                                </div>
+                                <img class="MagicZoomLoading" width="16" height="16" src="__IMG__/home/loading.gif" alt="Loading..." />
+                            </div>
+
+                        </td>    
+                        <td class="text-l"  colspan="2" style=" background: #fff; vertical-align: top;" >
+<!--                            <div class="row cl pd-10  " style='padding-left: 10px;padding-right: 10px;'> 
+                                <table>
+                                    <tbody class="table  table-border table-bordered ">
+                                        <tr >
+                                            <td style="width:30%" class="text-r">产品名称：</td>
+                                            <td class="text-l"><{$productInfo.product_title}> </td>
+                                        </tr>
+                                          <tr>
+                                              <td style="width:30%" class="text-r">产品规格：</td>
+                                           <td class="text-l"><{$productInfo.product_norms}> </td>
+                                        </tr>
+                                          <tr>
+                                              <td style="width:30%" class="text-r">产品类别：</td>
+                                            <td class="text-l"><{$productInfo.product_title}> </td>
+                                        </tr>
+                                          <tr>
+                                              <td style="width:30%" class="text-r">市场价：</td>
+                                            <td class="text-l"><{$productInfo.market_price}> </td>
+                                        </tr>
+                                        <tr>
+                                             <td style="width:30%" class="text-r">会员价：</td>
+                                            <td class="text-l"><{$productInfo.member_price}> </td>
+                                        </tr>
+                                         
+                                    </tbody>
+                                </table>  
+                            </div>-->
+                        </td>
+                    </tr>  
+<!--                    <tr class="text-c">
+                        <td class="text-r">订单号</td>    
+                        <td class="text-l"><{$row.order_eg}></td>
+                        <td class="text-r">状态</td>
+                        <td class="text-l"><if condition='$row.status eq 1'>已经付款<elseif condition="$row.status eq 2" />已经发货<elseif condition="$row.status eq 3" />已经收货</if></td>
+                </tr>  
+                <tr class="text-c">
+                    <td class="text-c">产品名称</td>
+                    <td class="text-c">数量</td>
+                    <td class="text-c">单价</td>
+                    <td class="text-c">合计</td>
+                </tr>
+                <volist name='list' id='vo'>
+                    <tr class="text-c">
+                        <td class="text-c"><{$vo.producttitle}></td>
+                        <td class="text-c"><{$vo.productnum}></td>
+                        <td class="text-c"><{$vo.productmoney}></td>
+                        <td class="text-c"><{$vo.producttotalmoney}></td>
+                    </tr>
+                </volist>-->
+                <tr >
+                    <td class="text-c">产品名称</td>
+                    <td class="text-l"><{$productInfo.product_title}></td>
+                    <td class="text-c">产品价格</td>
+                    <td class="text-l"><{$productInfo.member_price}> </td>
+                </tr>
+                <tr c>
+                    <td class="text-c">产品描述</td>
+                    <td class="text-l" colspan="3">
+                        <{$productInfo.product_message}> 
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>  
+            <div id="pageNav" class="pageNav"><button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;关闭&nbsp;&nbsp;</button></div>
+        </div>
+    </div>
+<include file='Common:foot' />
+<script src="__JS__/home/ShopShow.js"></script>

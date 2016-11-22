@@ -1,0 +1,73 @@
+<include file='Common:head' />
+<title></title>
+</head>
+<body>
+      <form action=""   method="get" class="form form-horizontal SubmiForm" id="form-article-add"  >
+    <div class="page-container">
+        <div class="mt-0">
+            <table class="table table-border table-bordered table-hover table-bg ">
+                <tbody>
+                    <tr class="text-c">
+                        <td class="text-r">订单号</td>    
+                        <td class="text-l"><{$row.order_eg}></td>
+                        <td class="text-r">总金额</td>
+                        <td class="text-l"><{$row.total_sum}></td>
+                    </tr>  
+                    <tr class="text-c">
+                        <td class="text-r">会员账号</td>
+                        <td class="text-l"><{$user.username}></td>
+                          <td class="text-r">邮编</td>
+                        <td class="text-l"><input type="text" class="input-text post_code"  id="" value="<{$row.post_code}>" name="post_code" ></td>
+                    </tr>
+                    <tr class="text-c">
+                        <td class="text-r">收货人姓名</td>
+                        <td class="text-l"><input type="text" class="input-text receiver"  id="" value="<{$row.receiver}>" name="receiver" nullmsg='收货人姓名不能为空' datatype='*' ></td>
+                        <td class="text-r">联系电话</td>
+                        <td class="text-l"><input type="text" class="input-text mobile"   id="" value="<{$row.mobile}>" name="mobile"  nullmsg='联系电话不能为空' datatype='*' ></td>
+                    </tr>
+                    <tr class="text-c">
+                        <td class="text-r">收货地址</td>
+                        <td class="text-l" colspan="3"><input type="text" class="input-text address"   id="" value="<{$row.address}>" name="address" nullmsg='收货地址不能为空' datatype='*'  ></td>
+                    </tr>
+                    <tr class="text-c">
+                      
+                        <td class="text-r">备注</td>
+                        <td class="text-l" colspan="3"><input type="text" class="input-text message"  id="" value="<{$row.message}>" name="message" ></td>
+                    </tr>
+                    <tr class="text-c">
+                        <td class="text-r">物流公司</td>
+                        <td class="text-l">
+                            <span class="select-box" style='height: 31px;line-height: 31px;'>
+                                <select name="express"  class='select express'  value=''  nullmsg='请选择快递' datatype='*' >
+                                    <option value=""> 请选择快递</option>
+                                    <volist name='exp_list' id='vo'>
+                                        <option value="<{$vo.id}>" <if condition='$row["express"] eq $vo["id"]'> selected="selected" </if>> <{$vo.title}></option>
+                                    </volist>
+                                </select> 
+                            </span>
+                        </td>
+                        <td class="text-r">快递单号</td>
+                        <td class="text-l"><input type="text" class="input-text express_no"   id="" value="<{$row.express_no}>" name="express_no" nullmsg='快递单号不能为空' datatype='*'  ></td>
+                    </tr>
+                </tbody>
+            </table>  
+            <div id="pageNav" class="pageNav"><button class="btn btn-primary radius" type="submie" ><i class="Hui-iconfont">&#xe632;  </i>修改</button></div>
+        </div>
+    </div>
+    </form>
+<include file='Common:foot' />
+<script type="text/javascript">
+$(function(){
+	  
+	$(".SubmiForm").Validform({
+                callback:function(form){
+			order_edit_save(<{$row.id}>);
+			return false;
+		},
+		tiptype:1,
+         
+	});	
+	
+	
+})
+</script>

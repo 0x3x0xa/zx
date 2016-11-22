@@ -1,0 +1,40 @@
+<include file='Common:head' />
+<title></title>
+<body>  
+    <div class="page-container">
+        <form action=""  class="form form-horizontal SubmiForm" id="form-article-add"  >
+            <div class="row cl" style="padding-left: 40px; padding-right: 40px; text-align: center;">
+               静态钱包：<{$userInfo.alljingtaibonus}>    溢价积分：<{$userInfo.zengzhibonus}>   分红积分：<{$userInfo.fenhongbonus}>
+           </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">三级密码：</label>
+                <div class="formControls col-xs-5 col-sm-4">
+                    <input type="password" name="threepassword" id="" placeholder="" value="" class="input-text threepassword"  nullmsg='不能为空' datatype='*' >
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl text-c">
+                <button  class="btn btn-secondary radius"   type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认合并</button>
+                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </form>
+    </div>
+
+    <!--_footer 作为公共模版分离出去-->
+<include file='Common:foot' />
+<!--/_footer /作为公共模版分离出去-->
+<script type="text/javascript">
+    $(function () {
+
+        $(".SubmiForm").Validform({
+            callback: function (form) {
+                mergejingtaimoney();
+                return false;
+            },
+            tiptype: 2,
+        });
+
+
+    })
+
+</script>

@@ -1,0 +1,45 @@
+<include file='Common:head' />
+<title>会员列表</title>
+</head>
+<body>
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>财务中心 <span class="c-gray en">&gt;</span>市场业绩明细<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="page-container">
+        <form method="get" action="__SELF__">
+            <div class="text-c"> 
+
+                日期范围：
+                <input type="text" onFocus="WdatePicker({maxDate: '#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" name='search_starttime' class="input-text Wdate" style="width:120px;" value="<{$arr['search_starttime']}>">
+                -
+                <input type="text" onFocus="WdatePicker({minDate: '#F{$dp.$D(\'datemin\')}', maxDate: '%y-%M-%d'})" name='search_endtime' id="datemax" class="input-text Wdate" style="width:120px;" value="<{$arr['search_endtime']}>">
+                <button type="submit" class="btn btn-success" id="" ><i class="Hui-iconfont">&#xe665;</i> 搜索</button> 
+
+            </div></form>
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="l" >
+            </span>  <span class="r">共有数据：<strong><{$count}></strong> 条</span> </div>
+        <div class="mt-0">
+            <table class="table table-border table-bordered table-hover table-bg ">
+                <thead>
+                    <tr class="text-c">
+                        <th width="">来源账号</th>
+                         <th width="">区域</th>
+                        <th width="">金额</th>
+                        <th width="">日期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name='list' id='vo'>
+                    <tr class="text-c">
+                        <td class="text-c"><{$vo.message}></td>
+                        <td class="text-c"><if condition="$vo.type eq 0"> 左区<elseif condition="$vo.type eq 1" />中区<elseif condition="$vo.type eq 2" />右区</if></td>
+                        <td class="text-c"><{$vo.money}></td>
+                        <td class="text-c"><{$vo.create_date|date="Y-m-d H:i:s",###}></td>
+                    </tr>
+                </volist>
+
+                </tbody>
+            </table>  
+            <div id="pageNav" class="pageNav"><{$page}></div>
+        </div>
+    </div>
+<include file='Common:foot' />

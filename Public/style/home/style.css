@@ -1,0 +1,24 @@
+@charset "utf-8";
+/* CSS Document */
+body{font-family:Arial, Helvetica, sans-serif;font-size:14px;}
+.clear{clear:both;}
+.w100{width:100%;}
+.left{float:left;}
+.right{float:right;}
+html,body,div,ul,li,h1,h2,h3,h4,h5,h6,form,fieldset,input,textarea,p,th,td,img{padding:0;margin:0;}
+body{}
+ul,li{list-style:none;}
+a{text-decoration:none;cursor:pointer;}
+/*提示页面*/
+.Prompt_top, .Prompt_btm, .Prompt_ok, .Prompt_x {background:url(../../images/message.gif) no-repeat; display:inline-block }
+.Prompt {width:640px;margin:100px auto 180px; }
+.Prompt_top {background-position:0 0; height:15px;width:100%;}
+.Prompt_con {border-left:1px solid #E7E7E7;border-right:1px solid #E7E7E7;background:#fff;overflow:hidden;}
+.Prompt_btm { background-position:0 -27px; height:6px;width:100%;}
+.Prompt_con dl{overflow:hidden;background:#fff;}
+.Prompt_con dt {font-size:18px;margin:0;padding:15px; border-bottom:2px solid #E7E7E7;font-weight: bold;_height:20px;}
+.Prompt_con dd {padding:20px 0;margin:0;display:inline-block;}
+.Prompt_con dd h2 {display:inline-block;}
+.Prompt_ok{ background-position:-68px -39px; width:68px; height:68px; }
+.Prompt_x{ background-position:15px -39px; width:85px; height:68px; }
+/*提示页面end*/

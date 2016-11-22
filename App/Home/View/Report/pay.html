@@ -1,0 +1,58 @@
+<include file='Common:head' />
+<title></title>
+<body>  
+<div class="page-container">
+	<form action=""  class="form form-horizontal SubmiForm" id="form-article-add"  >
+            {__TOKEN__}
+             <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4" style='text-align:right;'>支付银行：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+                        
+				<select class="select bank select-box" size="1" name="bank"   datatype="*" nullmsg="请选择支付银行" >
+                                    <option value="">请选择支付银行</option>
+					<volist name='banklist' id='vo'>
+					 <option value="<{$vo.bankname}>"><{$vo.bankname}></option>
+					</volist>
+					</select>
+                        </div>
+                          <div class="Validform_checktip"></div>
+		</div>
+                <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">充值金额：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+				<input type="text" name="money" id="" placeholder="" value="" class="input-text money"    errormsg='请输入数字' nullmsg='充值金额不能为空' datatype='n' ajaxurl="<{:U('/Home/Report/check_money')}>"  >
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">备注：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+				<input type="text" name="" id="" placeholder="" value="" class="input-text message" >
+			</div>
+                         
+		</div>
+		<div class="row cl text-c">
+                    <button  class="btn btn-secondary radius"   type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认</button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+		</div>
+	</form>
+</div>
+
+<!--_footer 作为公共模版分离出去-->
+<include file='Common:foot' />
+<!--/_footer /作为公共模版分离出去-->
+<script type="text/javascript">
+$(function(){
+	  
+	$(".SubmiForm").Validform({
+                callback:function(form){
+                    pay();
+                    return false;
+		},
+		tiptype:1,
+         
+	});	
+	
+	
+})
+</script>

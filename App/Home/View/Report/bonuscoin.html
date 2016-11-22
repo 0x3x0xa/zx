@@ -1,0 +1,111 @@
+<include file='Common:head' />
+<title>基本设置</title>
+</head>
+<body>
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务管理 <span class="c-gray en">&gt;</span> 兑换中心 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="page-container">
+        <form class="form form-horizontal" id="form-article-add bonus2coin">
+            {__TOKEN__}
+            <div id="tab-system" class="HuiTab">
+                <div class="tabBar cl"><span>积分兑换</span><span >积分转让</span></div>
+                <div class="tabCon">
+                    <div class="row cl">
+                       &nbsp;&nbsp;   &nbsp;&nbsp;   &nbsp;&nbsp;[  当前市场积分：<{$userInfo.allbonus}>  ]  &nbsp;&nbsp;[  当前活动积分：<{$userInfo.alljingtaibonus}>  ] 
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>转换类型：</label>
+                        <div class="formControls col-xs-8 col-sm-9">
+                            <span class="select-box" >
+                                <select name="bizhong"  class='select bizhong'  value=''>
+                                    <option value="">选择积分类型</option>
+                                    <option value="19">市场积分转电子积分</option>
+                                    <option value="20">活动积分转电子积分</option>
+                                </select> 
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>转换金额：</label>
+                        <div class="formControls col-xs-8 col-sm-9">
+                            <input type="text" id="website-title" placeholder="" value="" class="input-text sum">
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>三级密码：</label>
+                        <div class="formControls col-xs-8 col-sm-9">
+                            <input type="password" id="website-Keywords" placeholder="" value="" class="input-text threepassword">
+                        </div>
+                    </div>
+					<div class="row cl">
+                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                        <button onclick='onBonus2Coin()' class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 确认转币</button>
+                        <button  class="btn btn-default radius" type="reset">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                    </div>
+					</div>
+                </div>
+				</form>
+				<form id="exchangemembercoin">
+                                      {__TOKEN__}
+                <div class="tabCon">
+                    <div class="row cl">
+                        &nbsp;&nbsp;   &nbsp;&nbsp;  &nbsp;&nbsp;[  当前电子积分：<{$userInfo.dianzimoney}>  ] &nbsp;&nbsp;[  当前现金积分：<{$userInfo.cash}>  ] 
+                    </div>
+
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2"> 接收方账号：</label>
+                        <div class="formControls col-xs-8 col-sm-9">
+                            <input type="text" class="input-text othername" value=""  name="" placeholder="">
+                        </div>
+                    </div>
+                     <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>转换类型：</label>
+                        <div class="formControls col-xs-8 col-sm-9">
+                            <span class="select-box" >
+                                <select name="type"  class='select type'  value=''>
+                                    <option value="">选择积分类型</option>
+                                    <option value="6">电子积分</option>
+                                     <option value="22">现金积分</option>
+                                </select> 
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2"> 数量：</label>
+                        <div class="formControls col-xs-8 col-sm-9">
+                            <input type="text" class="input-text money" value=""  name="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2"> 三级密码：</label>
+                        <div class="formControls col-xs-8 col-sm-9">
+                            <input type="password" class="input-text password" value=""  name="" placeholder="">
+                        </div>
+                    </div>
+					<div class="row cl">
+                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                        <button onclick='onMemberExchangeCoin()' class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 确认转币</button>
+                        <button  class="btn btn-default radius" type="reset">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                    </div>
+					</div>
+                </div>
+				</form>
+
+
+
+       
+    </div>
+
+<include file='Common:foot' />
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+    $(function () {
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+        $.Huitab("#tab-system .tabBar span", "#tab-system .tabCon", "current", "click", "0");
+    });
+    
+</script>
+<!--/请在上方写此页面业务相关的脚本-->

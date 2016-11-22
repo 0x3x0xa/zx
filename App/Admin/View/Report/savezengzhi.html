@@ -1,0 +1,45 @@
+<include file='Common:head' />
+<title></title>
+<body>  
+    <div class="page-container">
+        <form action=""  class="form form-horizontal SubmiForm" id="form-article-add"  >
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4" style="text-align: right;"><span class="c-red">*</span>单价：</label>
+                <div class="formControls col-xs-5 col-sm-4">
+                    <input type="text" class="input-text price" value="<{$data.price}>"  placeholder="" id="" name="price"  nullmsg='不能为空' datatype='*' >
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4" style="text-align: right;"><span class="c-red">*</span>周：</label>
+                <div class="formControls col-xs-5 col-sm-4">
+                           <input  type="text" id="datemin"  class="input-text Wdate"  onfocus="WdatePicker({minDate:'%y-%M-{%d-7}'})" nullmsg='不能为空' datatype='*'  value='<{$data.week|date="Y-m-d",###}>'/> 
+                </div>
+                <div class="Validform_checktip"></div>
+            </div>
+            <div class="row cl text-c">
+                <button  class="btn btn-secondary radius"   type="submit"><i class="Hui-iconfont">&#xe632;</i> 提交</button>
+                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </form>
+    </div>
+
+    <!--_footer 作为公共模版分离出去-->
+<include file='Common:foot' />
+<!--/_footer /作为公共模版分离出去-->
+<script type="text/javascript">
+
+    
+    $(function () {
+
+        $(".SubmiForm").Validform({
+            callback: function (form) {
+                zengzhi_save(<{$data['id']}>);
+                return false;
+            },
+            tiptype: 2,
+        });
+
+
+    })
+</script>

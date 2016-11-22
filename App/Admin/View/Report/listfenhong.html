@@ -1,0 +1,44 @@
+<include file='Common:head' />
+<title></title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务管理 <span class="c-gray en">&gt;</span>分红积分比例表<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<div class="pd-20">
+  <div class="text-c">
+   参考价格：<{$monovalent}>
+  </div>
+
+  <div class="cl pd-5 bg-1 bk-gray mt-20">
+      <span class="l"> 
+          <button type="button" class="btn btn-success excel" id="" onClick="showPage('600','250','添加单价','<{:U('Report/addfenhong')}>')" href="javascript:;" ><i class="Hui-iconfont">&#xe6df;</i> 添加单价</button>
+            </span>
+    <span class="r">共有数据：<strong><{$count}></strong> 条</span>
+  </div>
+  <table class="table table-border table-bordered table-hover table-bg table-sort">
+    <thead>
+      <tr class="text-c">
+        <th width="30">ID</th>
+        <th width="">每月的时间</th>
+        <th width="">单价</th>
+	<th width="120">添加日期</th>
+	<!--<th width="">状态</th>-->
+	<th width="120">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+	<volist name='list' id='vo'>
+      <tr class="text-c">
+	 <td><{$i}></td>
+        <td><{$vo.month|date='Y-m-d H:i:s',###}></td>
+        <td><{$vo.price}></td>
+	<td><{$vo.create_date|date='Y-m-d H:i:s',###}></td>
+        <!--<td class="text-c"><{$status[$vo[status]]}></td>-->
+        <td class=""><u onclick="showPage('600','250','修改信息','<{:U('Report/savefenhong',array('id'=>$vo['id']))}>')" class="text-primary" style="cursor:pointer">编辑 </td>
+      </tr>
+	  </volist>
+    </tbody>
+  </table>
+  <div id="pageNav" class="pageNav"><{$page}></div>
+</div>
+<include file='Common:foot' />

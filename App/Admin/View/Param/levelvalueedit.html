@@ -1,0 +1,64 @@
+<include file='Common:head' />
+<title>修改注册等级</title>
+<body>  
+<div class="page-container">
+	<form action=""  class="form form-horizontal SubmiForm" id="form-article-add"  >
+	
+                <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>会员等级：</label>
+			<div class="formControls col-xs-3 col-sm-4">
+                         
+				<select name="memberlevelid" class="select memberlevelid select-box"  nullmsg='不能为空' datatype='*' >
+                                <option value="" >请选择</option>
+                                 <volist name='memberlevellist' id='vo'  > 
+                                     <option value="<{$vo.id}>" <if condition='$row["memberlevelid"] eq $vo["id"]'>selected='selected'</if>><{$vo.title|htmlspecialchars_decode=###}></option>
+                                </volist>
+				</select>
+                        </div>  <div class="Validform_checktip"></div>    
+		</div>
+	
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>层级：</label>
+			<div class="formControls col-xs-3 col-sm-4">
+				<select name="setlevelid" class="select setlevelid select-box"  nullmsg='不能为空' datatype='*' >
+                                 <volist name='setlevellist' id='vo'  > 
+                                         <option value="<{$vo.id}>" <if condition='$row["setlevelid"] eq  $vo["id"]'>selected='selected'</if> ><{$vo.min}>-<{$vo.max}></option>
+                                </volist>
+				</select>
+                        </div>  <div class="Validform_checktip"></div>    
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>值：</label>
+			<div class="formControls col-xs-3 col-sm-4">
+                            <input type="text" class="input-text value" value="<{$row.value}>"  placeholder="" id="" name="value"  nullmsg='不能为空' datatype='*' >
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+                     
+		<div class="row cl text-c">
+			
+                            <button  class="btn btn-secondary radius"   type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认修改</button>
+				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			
+		</div>
+	</form>
+</div>
+
+<!--_footer 作为公共模版分离出去-->
+<include file='Common:foot' />
+<!--/_footer /作为公共模版分离出去-->
+<script type="text/javascript">
+$(function(){
+	  
+	$(".SubmiForm").Validform({
+                callback:function(form){
+                    levelvalue_edit(<{$row.id}>);
+                    return false;
+		},
+		tiptype:2,
+         
+	});	
+	
+	
+})
+</script>

@@ -1,0 +1,137 @@
+﻿<include file='Common:head' />
+<link rel="stylesheet" href="__PUBLIC__/H-ui/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<title></title>
+</head>
+<body class="pos-r">
+
+
+    <div class="pos-a" style="width:100%;left:0;top:0; bottom:0; height:100%; border-right:1px solid #e5e5e5;">
+             <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>会员管理 <span class="c-gray en">&gt;</span>推荐关系图 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+        <div class="cl pd-5 bg-1 bk-gray mt-0" >
+            <form action="" method="" class="search_from">
+                <span class="l" > 会员账号：<input type="text" class="input-text search_username" style="width:150px" placeholder="输入账号" id="" value="" name="search_username" nullmsg="请输入会员账号！"  datatype="*"  > </span>
+                <div ><button type="button" class="btn btn-success" id="" onclick='search()' ><i class="Hui-iconfont">&#xe665;</i> 搜索</button> </div>
+            </form>
+        </div>
+        <ul id="treeDemo" class="ztree">
+        </ul>
+    </div>
+<include file='Common:foot' />
+<script type="text/javascript" src="__PUBLIC__/H-ui/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script> 
+
+<!--
+全部一次性加载所有节点
+<script type="text/javascript">
+var setting = {
+        view: {
+                dblClickExpand: false,
+                showLine: true,
+                selectedMulti: false
+
+        },
+        data: {
+                simpleData: {
+                        enable:true,
+                        idKey: "id",
+                        pIdKey: "pId",
+                        rootPId: ""
+                }
+        },
+        callback: {
+                beforeClick: function(treeId, treeNode) {
+                        var zTree = $.fn.zTree.getZTreeObj("tree");
+                                demoIframe.attr("src",treeNode.file );
+                                return true;
+                        
+                }
+        }
+        
+};
+
+ var zNodes;//数据变量              
+//ajax提交数据，请求后台PHP处理返回出目录结构json数据
+$.ajax({
+        url:"/Admin/Member/usertree",
+        type: "post",
+        async: false,
+        dataType:"json",  
+        success: function (data) {
+                        //alert(data);
+                        zNodes=data;    //将请求返回的数据存起来
+                         //alert(zNodes);
+        },
+        error: function (){//请求失败处理函数  
+                alert('请求失败');  
+        },  
+})
+
+var code;
+                
+function showCode(str) {
+        if (!code) code = $("#code");
+        code.empty();
+        code.append("<li>"+str+"</li>");
+}
+                
+$(document).ready(function(){
+        var t = $("#treeDemo");
+        t = $.fn.zTree.init(t, setting, zNodes);
+        demoIframe = $("#testIframe");
+        demoIframe.bind("load", loadReady);
+        var zTree = $.fn.zTree.getZTreeObj("tree");
+        zTree.selectNode(zTree.getNodeByParam("id",'11'));
+});
+</script>-->
+
+<!---异步加载节点--->
+<SCRIPT type="text/javascript">
+ var search_username = $('.search_username').val();
+function search()
+{
+    var search_username = $('.search_username').val();
+    var url2 = "/Admin/Member/listrecommend";
+ 
+
+    var setting = {
+        view: {
+            selectedMulti: false
+        },
+        async: {
+            enable: true,
+            url: url2,
+            autoParam: ["id","name"],
+            otherParam: {"name": search_username},
+            dataFilter: filter,
+            type: 'get',
+            datatype: 'text',
+        }, callback: {
+            beforeClick: function () {
+            
+            },
+            beforeAsync: function () {
+           
+            }
+        }
+    };
+    zTreeObj = $.fn.zTree.init($("#treeDemo"), setting);
+
+
+    function filter(treeId, parentNode, childNodes) {
+        if (!childNodes)
+            return null;
+        for (var i = 0, l = childNodes.length; i < l; i++) {
+            childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+        }
+        return childNodes;
+    }
+}
+
+$(document).ready(function () {
+    search();//树的初始化
+
+});
+
+
+</SCRIPT>
+</body>
+</html>

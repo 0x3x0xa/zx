@@ -1,0 +1,38 @@
+<include file='Common:head' />
+<title>系统日志</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>  系统管理<span class="c-gray en">&gt;</span>系统日志<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+  <table class="table table-border table-bordered table-bg">
+    <thead>
+      <tr>
+        <th scope="col" colspan="8">系统日志列表<span class="r">共有数据：<strong><{$count}></strong> 条</span></th> 
+      </tr>
+      <tr class="text-c">
+        <th width="50">No</th>
+        <th width="150">管理员账号</th>
+		<th >操作</th>
+        <th width="150">IP地址</th>
+        <th width="120">国家</th>
+		<th width="40">地区</th>
+		<th width="180">操作时间</th>
+      </tr>
+    </thead>
+    <tbody>
+	<volist name='list' id='vo'>
+      <tr class="text-c">
+        <td><{$i}></td>
+        <td><{$vo.username}></td>
+		<td><{$vo.message}></td>
+        <td><{$vo.ip}></td>
+		<td><{$vo.country}></td>
+        <td><{$vo.area}></td>
+        <td><{$vo.create_date}></td>
+      </tr>
+     </volist>
+    </tbody>
+  </table>
+   <div id="pageNav" class="pageNav"><{$page}></div>
+</div> 
+<include file='Common:foot' />

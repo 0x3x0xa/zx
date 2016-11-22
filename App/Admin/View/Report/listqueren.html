@@ -1,0 +1,61 @@
+<include file='Common:head' />
+<title></title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务管理 <span class="c-gray en">&gt;</span> 确认充值汇款  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<form method="get" action="__SELF__">
+<div class="pd-20">
+  <div class="text-c">
+    日期范围：<input type="text" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" name='search_starttime' class="input-text Wdate" style="width:120px;" value="<{$arr['search_starttime']}>">
+    -
+    <input type="text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" name='search_endtime' id="datemax" class="input-text Wdate" style="width:120px;" value="<{$arr['search_endtime']}>">
+    <input type="text" class="input-text" style="width:200px" placeholder="输入账号" id="" value="<{$arr['search_username']}>" name="search_username" ><button type="submit" class="btn btn-success" id="" ><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+
+  </div>
+  </form>
+  <div class="cl pd-5 bg-1 bk-gray mt-20">
+ 
+    <span class="r">共有数据：<strong><{$count}></strong> 条</span>
+  </div>
+  <table class="table table-border table-bordered table-hover table-bg table-sort">
+    <thead>
+      <tr class="text-c">
+       
+        <th width="30">ID</th>
+	<th width="80">会员账号</th>
+	<th width="100">汇款银行</th>
+        <th width="">汇入户主</th>
+        <th width="">汇入账号</th>
+        <th width="">汇款人</th>
+        <th width="">汇款金额</th>
+	<th width="">汇款日期</th>
+        <th width="">创建日期</th>
+        <th width="">审核日期</th>
+	<th width="120">状态</th>
+	<th width="120">备注</th>
+        <th width="">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+	<volist name='list' id='vo'>
+      <tr class="text-c">
+	<td><{$i}></td>
+        <td><{$vo.username}></td>
+        <td><{$vo.bank}></td>
+	<td><{$vo.receive}></td>
+	<td><{$vo.bankno}></td>
+        <td><{$vo.remitter}></td>
+        <td><{$vo.money}></td>
+        <td><{$vo.remittance_date}></td>
+         <td><{$vo.create_date|date="Y-m-d H:i:s",###}></td>
+        <td><{$vo.shenhedate|date="Y-m-d H:i:s",###}></td>
+        <td><if condition='$vo.status eq "1" '>未发放<elseif condition='$vo.status eq "2" ' />已经审核 <elseif   condition='$vo.status eq "3" '/>已经发放<else/>拒绝发放</if></td>
+        <td ><{$vo.message}></td>
+        <td width="120"><if condition='$vo.status eq "2" '>  <a href="javascript:void(0);"  onclick="fafangRemittance(<{$vo.id}>)">发放现金积分</a> <else/> 已经发放</if> </td>
+      </tr>
+	  </volist>
+    </tbody>
+  </table>
+  <div id="pageNav" class="pageNav"><{$page}></div>
+</div>
+<include file='Common:foot' />

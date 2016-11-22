@@ -1,0 +1,56 @@
+<include file='Common:head' />
+<title>修改</title>
+</head>
+<body>
+<article class="page-container">
+	<form action="" method="POST" class="form form-horizontal" id="form-member-add">
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;' ><span class="c-red">*</span>商户名称：</label>
+			<div class="formControls col-xs-7 col-sm-9">
+				<input type="text" class="input-text username" value="<{$info.username}>" placeholder="" id="username" name="username">
+			</div>
+		</div>
+            <div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;' ><span class="c-red">*</span>密钥：</label>
+			<div class="formControls col-xs-7 col-sm-9">
+				<input type="text" class="input-text md5pwd" value="<{$info.md5pwd}>" placeholder="" id="md5pwd" name="md5pwd">
+			</div>
+		</div>
+             <div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;' ><span class="c-red">*</span>域名：</label>
+			<div class="formControls col-xs-7 col-sm-9">
+				<input type="text" class="input-text message" value="<{$info.message}>" placeholder="wwww.xxx.com" id="message" name="message">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+<include file='Common:foot' />
+<script type="text/javascript">
+$(function(){
+	$("#form-member-add").validate({
+		rules:{
+			username:{
+				required:true,
+				
+			},
+			md5pwd:{
+				required:true,
+				
+			},
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			
+			pay_edit_save(<{$id}>);
+		}
+	});
+});
+</script> 

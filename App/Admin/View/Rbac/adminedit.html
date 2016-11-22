@@ -1,0 +1,130 @@
+<include file='Common:head' />
+<style type="text/css">
+.msgs{display:inline-block;width:104px;color:#fff;font-size:12px;border:1px solid #0697DA;text-align:center;height:30px;line-height:30px;background:#0697DA;cursor:pointer;}
+.msgs1{background:#E6E6E6;color:#818080;border:1px solid #CCCCCC;}
+</style>
+<title>修改管理员信息</title>
+</head>
+<body>
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal SubmiForm" id="form-member-add">
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;' ><span class="c-red">*</span>账号：</label>
+			<div class="formControls col-xs-7 col-sm-9">
+				<input type="text" class="input-text username" value="<{$admin_row.username}>" placeholder="" 
+				 nullmsg="请输入账号！"  id="username" name="username"  datatype="*"
+				>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'>分组：</label>
+			<div class="formControls col-xs-7 col-sm-9"> <span class="select-box">
+				<select class="select" size="1" name="groupid">
+					<volist name='role' id='vo'>
+			<option value="<{$vo.id}>" <if condition='$vo.id eq $admin_row.groupid'>selected</if>><{$vo.rolename}></option>
+			</volist>
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>性别：</label>
+			<div class="formControls col-xs-7 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="sex" type="radio" id="sex-1" value="1" <if condition='$admin_row.sex eq 1'>checked</if> >
+					<label for="sex-1">男</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-2" name="sex" value="0" <if condition='$admin_row.sex eq 0'>checked</if>>
+					<label for="sex-2">女</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-3" name="sex" value="-1" <if condition='$admin_row.sex eq -1'>checked</if>>
+					<label for="sex-3">保密</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>手机：</label>
+			<div class="formControls col-xs-7 col-sm-9">
+				<input type="text" class="input-text mobile" value="<{$admin_row.mobile}>" placeholder="" id="mobile" name="mobile" errormsg="手机号码格式不正确！"  nullmsg='请输入您的手机号码' datatype="m">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>邮箱：</label>
+			<div class="formControls col-xs-7 col-sm-9">
+				<input type="text" class="input-text email" placeholder="@" name="email" id="email"  value="<{$admin_row.email}>" errormsg="邮箱格式不正确！"  nullmsg='请输入您的邮箱' datatype="e" >
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'><span class="c-red">*</span>地址：</label>
+			<div class="formControls col-xs-7 col-sm-9">
+				<input type="text" class="input-text address" placeholder="" name="address"  value="<{$admin_row.address}>" >
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'>备注：</label>
+			<div class="formControls col-xs-7 col-sm-9">
+				<textarea name="abstract" cols="" rows="" class="textarea abstract"  placeholder="说点什么...最少输入10个字符" onKeyUp="textarealength(this,100)"><{$admin_row.abstract}></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3" style='text-align:right;'>短信验证码：</label>
+			<div class="formControls col-xs-7 col-sm-9">
+					<input type="text" class="input-text code" placeholder="" name="code"  value=""  style='width:120px;'   nullmsg='请输入手机验证码' datatype="*">&nbsp;&nbsp;<span class="msgs">获取短信验证码</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+		 <button type="submit" class="btn btn-secondary radius" ><i class="Hui-iconfont"></i> 确认修改</button>
+			</div>
+		</div>
+	</form>
+</article>
+<include file='Common:foot' />
+<script type="text/javascript">
+$(function(){
+
+$(".SubmiForm").Validform({
+                callback:function(form){
+                  admin_edit_save(<{$id}>);
+                    return false;
+		},
+		tiptype:1,
+         
+	});	
+
+		//获取短信验证码
+		var validCode=true;
+		$(".msgs").click (function  () {
+			var time=60*3;
+			var code=$(this);
+			var flag=false;
+			if (validCode) {
+				validCode=false;
+				code.addClass("msgs1");
+				flag=true;
+			var t=setInterval(function  () {
+				time--;
+				code.html(time+"秒");
+				if (time==0) {
+					clearInterval(t);
+				code.html("重新获取");
+					validCode=true;
+				code.removeClass("msgs1");
+
+				}
+			},1000)
+			}
+			if(flag)
+			{  
+				flag=false;
+				set_code(<{$id}>);
+			}
+		})
+	/****************************************/
+
+
+});
+</script> 

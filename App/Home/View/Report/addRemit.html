@@ -1,0 +1,72 @@
+<include file='Common:head' />
+<title></title>
+<body>  
+<div class="page-container">
+	<form action=""  class="form form-horizontal SubmiForm" id="form-article-add"  >
+            {__TOKEN__}
+            <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4" style="text-align: right;">汇入账号：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+                            <volist name='bankslist' id='vo'>
+                            <div class="radio-box"  style='padding-left:0px;' >
+                                <input name="bankno" type="radio" id="bankno" value='<{$vo.id}>'  nullmsg="请选择汇入的银行卡号！" datatype="*" ><label>[<{$vo.bankno}>][<{$vo.bankname}>][<{$vo.name}>]</label>
+                            </div>
+                            </volist>  
+			</div>
+                        <div class="Validform_checktip"></div>
+                          
+		</div>
+                <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">汇款人：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+				<input type="text" name="remitter" id="" placeholder="" value="" class="input-text remitter"  nullmsg='汇款人不能为空' datatype='*' >
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+            <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">汇款充值金额：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+				<input type="text" name="money" id="" placeholder="" value="" class="input-text money"  nullmsg='汇款充值金额不能为空' datatype='*' >
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+             <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">汇款日期：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+				<input type="text" onfocus="WdatePicker({skin:'whyGreen',maxDate: '%y-%M-%d' })" id="datemin" name="remittance_date"  placeholder="" value="" class="input-text Wdate remittance_date">
+			</div>
+                           <div class="Validform_checktip"></div>
+		</div>
+          
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-4 " style="text-align: right;">备注：</label>
+			<div class="formControls col-xs-5 col-sm-4">
+				<input type="text" name="" id="" placeholder="" value="" class="input-text message" >
+			</div>
+                         
+		</div>
+		<div class="row cl text-c">
+                    <button  class="btn btn-secondary radius"   type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认</button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+		</div>
+	</form>
+</div>
+
+<!--_footer 作为公共模版分离出去-->
+<include file='Common:foot' />
+<!--/_footer /作为公共模版分离出去-->
+<script type="text/javascript">
+$(function(){
+	  
+	$(".SubmiForm").Validform({
+                callback:function(form){
+                    remittance();
+                    return false;
+		},
+		tiptype:1,
+         
+	});	
+	
+	
+})
+</script>

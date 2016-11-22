@@ -1,0 +1,15 @@
+<include file='common:head' />
+<title>查看</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 通知公告 <span class="c-gray en">&gt;</span> 公告详情 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<div class="pd-20">
+  <div class="Huiform">
+	<center><h4><{$article_row.art_title}></h4></center>
+	<center><h5>作者：&nbsp;<{$article_row.art_author}>&nbsp;&nbsp来源：&nbsp;<{$article_row.art_source}></h5></center>
+	<br/>
+	<{$article_row.art_content|htmlspecialchars_decode=###}>
+  </div>
+</div>
+<include file='common:foot' />
