@@ -646,9 +646,11 @@ function findbank() {
 }
 
 //查找产品列表
-function findproductlist() {
+function findproductlist($level=0) {
     $product_table = M('product');
-    $productlist = $product_table->order('id desc')->where(array('status' => '1'))->select();
+    $productlist1 = $product_table->order('id desc')->where(array('status' => '1','show'=>$level))->select();
+    $productlist2 = $product_table->order('id desc')->where(array('status' => '1','show'=>0))->select();
+    $productlist=  array_merge($productlist1,$productlist2);
     return $productlist;
 }
 

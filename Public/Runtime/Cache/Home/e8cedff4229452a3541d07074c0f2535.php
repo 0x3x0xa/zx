@@ -27,7 +27,7 @@
 <body>
     <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>财务中心<span class="c-gray en">&gt;</span>奖金明细 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
     <div class="page-container">
-        <form method="get" action="/index.php/Home/Report/listbonusbillitem.html?search_type=10&amp;search_starttime=&amp;search_endtime=&amp;token=40cdf6327dc0e0d58eb0d7886ec113d3_ac7c916fcd88836b92a10f573ac5d388">
+        <form method="get" action="/index.php/Home/Report/listbonusbillitem.html">
             <div class="text-c"> 
                 <span class="select-box" style='width:130px;'>
                     <select name="search_type"  class='select'  value=''>

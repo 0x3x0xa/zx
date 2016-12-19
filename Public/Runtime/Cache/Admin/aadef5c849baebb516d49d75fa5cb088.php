@@ -26,7 +26,7 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>会员管理 <span class="c-gray en">&gt;</span>会员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-<form method="get" action="/index.php/Member/index.html">
+<form method="get" action="/index.php/Admin/Member/index.html?search_level=&amp;search_username=nc000678&amp;search_starttime=&amp;search_endtime=&amp;token=6b0bbb368c3a99becd4deef87ecae23a_5c19912bae0e9526b525678d5dbb526b">
 	<div class="text-c"> 
             
            <span class="select-box" style='width:140px;'>

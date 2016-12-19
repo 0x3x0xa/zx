@@ -1246,6 +1246,7 @@ function product_add_save()
     var product_type = $('.product_type').val();
     var market_price = $('.market_price').val();
     var member_price = $('.member_price').val();
+    var show=$('.show').val();
     var imageurl = $('.imageurl').val();
     var product_message = $('.product_message').val();
     $.ajax({
@@ -1255,7 +1256,7 @@ function product_add_save()
                 {
                     product_title: product_title, product_norms: product_norms,
                     product_type: product_type, market_price: market_price,
-                    product_message: product_message, imageurl: imageurl, member_price: member_price
+                    product_message: product_message, imageurl: imageurl, member_price: member_price,show:show,
                 },
         dataType: 'json',
         async: false, //设置为同步操作就可以给全局变量赋值成功 
@@ -1287,13 +1288,14 @@ function product_edit_save(id) {
     var market_price = $('.market_price').val();
     var member_price = $('.member_price').val();
     var imageurl = $('.imageurl').val();
+    var show=$('.show').val();
     var product_message = $('.product_message').val();
     $.ajax({
         type: "post",
         url: "/Admin/Product/productedit",
         data: {id: id, product_title: product_title, product_norms: product_norms,
             product_type: product_type, market_price: market_price,
-            product_message: product_message, imageurl: imageurl, member_price: member_price},
+            product_message: product_message, imageurl: imageurl, member_price: member_price,show:show},
         dataType: 'json',
         async: false, //设置为同步操作就可以给全局变量赋值成功 
         success: function (data) {

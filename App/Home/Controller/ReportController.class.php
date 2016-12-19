@@ -135,7 +135,7 @@ class ReportController extends CommonController {
 
     //兑换中心
     public function bonuscoin() {
-      
+
         $uid = session('uid');
         $member_table = M('member');
         $userInfo = $member_table->field('cash,dianzimoney,allbonus,alljingtaibonus')->find($uid);
@@ -208,7 +208,7 @@ class ReportController extends CommonController {
             }
             if ($bizhong == 20) {
                 if ($sum <= $userInfo['alljingtaibonus']) {
-                  
+
                     $allusermoney = $userInfo['dianzimoney'] + $sum;
                     $balanceusermoney = $userInfo['alljingtaibonus'] - $sum;
                     $relust1 = $member_table->save(array('id' => $uid, 'dianzimoney' => $allusermoney, 'alljingtaibonus' => $balanceusermoney));
@@ -476,7 +476,7 @@ class ReportController extends CommonController {
             $map['type'] = $_REQUEST['search_type'];
             $search['search_type'] = $_REQUEST['search_type'];
         }
-        
+
         $currency = getbonustype();
         $count = $bonus_table->where($map)->count(); // 查询满足要求的总记录数
         $Page = new \Think\Page($count, 15); // 实例化分页类 传入总记录数和每页显示的记录数(25)
@@ -853,8 +853,8 @@ class ReportController extends CommonController {
                 array_push($mothtime, $times);
             }
         }
-    //    p($monthjson);
-      //  p($pricejson);
+        //    p($monthjson);
+        //  p($pricejson);
         $this->assign('monthjson', $monthjson);
         $this->assign('pricejson', $pricejson);
         $this->display();
@@ -863,7 +863,6 @@ class ReportController extends CommonController {
     //企业利润走势
     public function zenzhibonus() {
         //$uis=  session('uid');
-
 //        $bonus_table = M('bonus');
 //        $priceweek_table = M('priceweek');
 //        $weektime = array();
@@ -888,7 +887,7 @@ class ReportController extends CommonController {
 //        $this->assign('weekdate', $date);
 //        $this->assign('pricejson', $pricejson);
 //        
-        
+
         $nowmonth = mktime(0, 0, 0, date('m'), 1, date('Y')); //当月第一天的时间戳
         $mothtime = array(); //十二个月的时间
         $m = date('m');
@@ -897,13 +896,13 @@ class ReportController extends CommonController {
 
             array_push($mothtime, $times);
         }
-      
+
         $priceweek_table = M('priceweek');
         $monthmoney = '';
 
         for ($i = 0; $i < 12; $i++) {
-           
-            $list1 = $priceweek_table->where(array('week' => $mothtime[$i]))->find();//之前按周计算。现在按月计算
+
+            $list1 = $priceweek_table->where(array('week' => $mothtime[$i]))->find(); //之前按周计算。现在按月计算
             if ($list1['month'] > $nowmonth) {
                 $list1 = null;
             }
@@ -917,7 +916,7 @@ class ReportController extends CommonController {
                 $monthprice.=$price . ',';
             }
         }
-      
+
         $pricejson = trim($monthprice, ',');
         for ($i = 1; $i < 13; $i++) {
             if ($i < $m) {
@@ -925,7 +924,7 @@ class ReportController extends CommonController {
                 array_push($mothtime, $times);
             }
         }
-       
+
         $this->assign('pricejson', $pricejson);
 
 
@@ -1175,7 +1174,7 @@ class ReportController extends CommonController {
         $shouru = $userInfo['lingdaobonus'] + $userInfo['guanlibonus'] + $userInfo['jinjibonus'] + $userInfo['quanqiufenhongbonus'] + $userInfo['yuexinbonus'] + $userInfo['hongbaobonus'] + $userInfo['daishubonus'];
         $userallbonus = $userInfo['lingdaobonus'] + $userInfo['guanlibonus'] + $userInfo['jinjibonus'] + $userInfo['quanqiufenhongbonus'] + $userInfo['yuexinbonus'] + $userInfo['hongbaobonus'] + $userInfo['daishubonus'] + $userInfo['allbonus'];
         if ($shouru != 0) {
-            $relust = $bonus_table->add(array('uid' => $uid, 'type' => '19', 'income' => $shouru, 'status' => '1', 'balance' => $userallbonus, 'message' => '动态奖金合并', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '13')); //13合并转入
+            $relust = $bonus_table->add(array('uid' => $uid, 'type' => '19', 'income' => $shouru, 'status' => '1', 'balance' => $userallbonus, 'message' => '市场积分合并', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '13')); //13合并转入
             $relust1 = $member_table->save(array('id' => $uid, 'lingdaoBonus' => '0', 'guanliBonus' => '0', 'jinjiBonus' => '0', 'quanqiufenhongBonus' => '0', 'yuexinBonus' => '0', 'hongbaobonus', 'allbonus' => $userallbonus));
             if ($relust && $relust1) {
                 $member_table->commit();
@@ -1364,11 +1363,16 @@ class ReportController extends CommonController {
 
     //添加卖出
     public function jifentixian() {
+        
+        
         $type = allmomeytype();
         $data = getbonusparam(); //获取的奖金比例参数
+       
+        
+        
         $todayTime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
         $beginThismonth = mktime(0, 0, 0, date('m'), 1, date('Y'));  //当月第一天时间戳
-       
+
         $week = mktime(0, 0, 0, date('m'), date('d') - date('w'), date('Y')); //当周第一天
         $uid = session('uid');
         $member_table = M('member');
@@ -1385,6 +1389,14 @@ class ReportController extends CommonController {
         $memberLevelInfo = $memberlevel_table->find($userInfo['level']); //获取到会员等级释放的比例
         $integral = intval($userInfo['integral'] * $memberLevelInfo['zhengzhiplace']); //本周释放的积分
         if (IS_POST) {
+             if($data['qiyeliruanmaichu_status']==0){
+                $json['status'] = 2;
+                $json['msg'] = '尚未对外开放';
+                echo json_encode($json);
+                exit;
+            
+            }
+            
             $bizhong = 10;
             // $money = I('post.money', '', 'htmlspecialchars');
             $threepassword = I('post.threepassword', '', 'htmlspecialchars');
@@ -1501,9 +1513,9 @@ class ReportController extends CommonController {
         $Page = new \Think\Page($count, 15); // 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show = $Page->show();
         $list = $paylist_tabel->order('id desc')->where($map)->limit($Page->firstRow . ',' . $Page->listRows)->select();
-     
+
         $datainfo = getpayparam();
-        $this->assign('url',$datainfo['message']);
+        $this->assign('url', $datainfo['message']);
         $this->assign('count', $count);
         $this->assign('page', $show);
         $this->assign('list', $list);
@@ -1633,7 +1645,7 @@ class ReportController extends CommonController {
 
                 $json['status'] = 1;
                 $json['billno'] = $BillNo;
-                $json['url']='http://'.$datainfo['message'];
+                $json['url'] = 'http://' . $datainfo['message'];
                 $json['msg'] = '操作成功';
                 echo json_encode($json);
                 exit;
@@ -1650,6 +1662,23 @@ class ReportController extends CommonController {
         $this->display();
     }
 
-  
+    public function getname() {
+        if (IS_POST) {
+            $username = I('post.othername', '', 'htmlspecialchars');
+            $member_table = M('member');
+            $userInfo = $member_table->field('name')->where(array('username' => $username))->find();
+            if ($userInfo) {
+                 $json['status'] = 1;
+                $json['msg'] = $userInfo['name'];
+                echo json_encode($json);
+                exit;
+            } else {
+                $json['status'] = 2;
+                $json['msg'] = '用户不存在';
+                echo json_encode($json);
+                exit;
+            }
+        }
+    }
 
 }

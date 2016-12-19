@@ -175,6 +175,8 @@ class ProductController extends CommonController {
 
             $list1 = M('class')->where(array('type' => '3'))->select();
             $this->assign('list1', $list1);
+            $memberlevel=M('memberlevel')->where(array('id'=>array('gt','1')))->select();
+            $this->assign('memberlevel',$memberlevel);
             $this->display();
         }
     }
@@ -254,6 +256,8 @@ class ProductController extends CommonController {
         $this->assign('list1', $list1);
         $this->assign('product_row', $product_row);
         $this->assign('id', $id);
+        $memberlevel=M('memberlevel')->where(array('id'=>array('gt','1')))->select();
+            $this->assign('memberlevel',$memberlevel);
         $this->display();
     }
 

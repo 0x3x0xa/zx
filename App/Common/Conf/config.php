@@ -3,7 +3,7 @@
 return array(
     //'配置项'=>'配置值'
     //'MODULE_DENY_LIST'      => array('Home'),//禁用的分组
-    'DEFAULT_MODULE' => 'Admin',
+    'DEFAULT_MODULE' => 'Home',
     'MODULE_ALLOW_LIST' => array('Home', 'Admin'), //允许的分组
     'SHOW_PAGE_TRACE' => true,
     /* 数据库设置 */

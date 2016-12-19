@@ -27,7 +27,7 @@
     <div class="pos-a" style="width:100%;left:0;top:0; bottom:0; height:100%; border-right:1px solid #e5e5e5;">
         <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>会员管理 <span class="c-gray en">&gt;</span>组织关系图 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
         <div class="cl pd-5 bg-1 bk-gray mt-0" >
-            <form action="/index.php/Member/chart.html" method="get" class="search_from">
+            <form action="/index.php/Admin/Member/chart.html" method="get" class="search_from">
                 <span class="l" > 会员账号：
                     <input type="text" class="input-text search_username" style="width:150px" placeholder="输入账号" id="search_username" <?php if($_GET['search_username']!= '' ): ?>value="<?php echo ($_GET['search_username']); ?>"<?php endif; ?> name="search_username" nullmsg="请输入会员账号！"  datatype="*"  > 
                        <select name="level" id="level"  onchange="selectLayer(this.value)" class='select' style='width:60px;height:31px;line-height:31px;'></span>

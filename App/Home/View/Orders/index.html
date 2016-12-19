@@ -114,6 +114,10 @@
                      <tr>
                          <td colspan="6"><span onclick="dzjf()" style="cursor: pointer;color:#0331da;">使用电子积分</span><div id="dzjf" style="display: none;"> <input  type="text" class="input-text dzjf"    style="width:150px;" onblur="verifdzjf(<{$userInfo.dianzimoney}>)" >  剩余电子币：<{$userInfo.dianzimoney}></div></td>
                      </tr>
+                 <else/>
+                 <tr> 
+                            <td colspan="6"> <span onclick="gwjf()" style="cursor: pointer;color:#0331da;">使用购物积分 </span> <div id="gwjf" style="display: none"><input  type="text" class="input-text gwjf"  onblur="verifygwjf(<{$userInfo.gouwujifen}>)"  style="width:150px;" ><span>剩余购物积分：<{$userInfo.gouwujifen}></span></div></td>
+                     </tr> 
                 </if>
                 </tbody>
                 </table>  
@@ -121,19 +125,13 @@
                 </div>
 		</div>
             </fieldset>
-            <if condition="$flag eq 1 " >
+          
                <div class="row cl">
 			<div class="col-xs-8 col-sm-4 col-xs-offset-4 col-sm-offset-3">
                             <button class="btn btn-primary radius" type="button" id="btn" style="background:gray;border:gray;"><i class="Hui-iconfont">&#xe632;  </i>确认购买</button>
 			</div>
 		</div>
-             <else/>
-             <div class="row cl">
-			<div class="col-xs-8 col-sm-4 col-xs-offset-4 col-sm-offset-3">
-                            <button class="btn btn-primary radius" type="submit" id="btn" ><i class="Hui-iconfont">&#xe632;  </i>确认购买</button>
-			</div>
-		</div>
-            </if>
+         
 	</form>
 </article>
     

@@ -22,6 +22,19 @@
                     <tr>
                         <th class="text-r" width="200">一个银行卡号可注册会员数：</th><td><input type="number" name='registBanknoNum' maxlength="1" min="0" max="10" precision="0" size="16"  value="<{$setparam.registBanknoNum}>" style="width:200px" class="input-text registBanknoNum">(0表示不限制)</td>
                     </tr>
+                      <tr>
+                        <th class="text-r" width="200">企业利润卖出：</th>
+                         
+                            <td><div class="radio-box">
+                                    <input name="qiyeliruanmaichu_status" type="radio" id="sex-1"  value="1" <if condition="$setparam.qiyeliruanmaichu_status eq 1 " > checked="checked"</if>>
+					<label for="sex-1">开启</label>
+				</div>
+                             <div class="radio-box">
+					<input name="qiyeliruanmaichu_status" type="radio" id="sex-1" value="0" <if condition="$setparam.qiyeliruanmaichu_status eq 0 " > checked="checked"</if> >
+					<label for="sex-1">关闭</label>
+				</div>
+                           </td>
+                    </tr>
                         <tr>
                         <th class="text-r" width="200">活动：</th>
                          

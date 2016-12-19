@@ -61,7 +61,7 @@
                     </div>
 					<div class="row cl">
                     <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                        <button onclick='onBonus2Coin()' class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 确认转币</button>
+                        <button onclick='onBonus2Coin()' class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 确认</button>
                         <button  class="btn btn-default radius" type="reset">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
                     </div>
 					</div>
@@ -77,7 +77,7 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"> 接收方账号：</label>
                         <div class="formControls col-xs-8 col-sm-9">
-                            <input type="text" class="input-text othername" value=""  name="" placeholder="">
+                            <input type="text" class="input-text othername" value=""  name="" placeholder="" onblur="getname()" style="width:200px;" >&nbsp;&nbsp;<span id="tip_msg"></span>
                         </div>
                     </div>
                      <div class="row cl">
@@ -106,7 +106,7 @@
                     </div>
 					<div class="row cl">
                     <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                        <button onclick='onMemberExchangeCoin()' class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 确认转币</button>
+                        <button onclick='onMemberExchangeCoin()' class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 确认</button>
                         <button  class="btn btn-default radius" type="reset">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
                     </div>
 					</div>

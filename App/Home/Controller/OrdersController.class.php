@@ -15,8 +15,8 @@ class OrdersController extends CommonController {
         $orderInfo=$order_table->where(array('uid'=>$uid))->find();
         $flag=($orderInfo)?1:0;
       
-        $userInfo = $member_table->field('name,mobile,post_code,province,city,area,detailed_address,gouwujifen,gouwujuan,dianzimoney,cash')->find($uid);
-        $productlist = findproductlist(); //获取商品
+        $userInfo = $member_table->field('name,mobile,post_code,province,city,area,detailed_address,gouwujifen,gouwujuan,dianzimoney,cash,level')->find($uid);
+        $productlist = findproductlist($userInfo['level']); //获取商品
         $this->assign('userInfo', $userInfo);
         $this->assign('flag',$flag);
         $this->assign('pro_list', $productlist);
@@ -235,18 +235,22 @@ class OrdersController extends CommonController {
      */
 
     protected function orderDade($array, $receiver, $mobile, $address, $post_code, $message) {
+       
         $todayTime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
         $product_table = M('product');
         $totalProductAmount = 0;
         $totalNum = 0;
         $count = count($array);
         for ($i = 0; $i < $count; $i++) {
-            $info = $product_table->field('id,member_price')->where(array('status' => 1))->find($array[$i]['id']);
+            $info = $product_table->field('id,member_price,show')->where(array('status' => 1))->find($array[$i]['id']);
+            
+            if($info['show']!=0){
             if (!$info) {
                 $json['status'] = 2;
                 $json['msg'] = '商品不存在或下架了！';
                 echo json_encode($json);
                 exit;
+            }
             }
             $totalNum+= $array[$i]['num']; //产品数量
             $totalProductAmount+=$info['member_price'] * $array[$i]['num']; //产品总金额

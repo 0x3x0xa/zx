@@ -33,6 +33,21 @@
                         </div>  <div class="Validform_checktip"></div>
                           
 		</div>
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品可见范围：</label>
+			<div class="formControls col-xs-3 col-sm-4">
+                         
+				<select name="show" class="select show select-box"  nullmsg='不能为空' datatype='*' >   
+                                <option value="" >请选择等级</option><option value="0">所有等级可见</option>    
+				<volist name='memberlevel' id='vo2'  > 
+                                <option value="<{$vo2.id}>"><{$vo2.title|htmlspecialchars_decode=###}></option>
+                                </volist>
+				</select>
+			
+                           
+                        </div>  <div class="Validform_checktip"></div>
+                          
+		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>市场价：</label>
 			<div class="formControls col-xs-3 col-sm-4">

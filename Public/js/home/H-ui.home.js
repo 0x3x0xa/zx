@@ -574,7 +574,33 @@ function onBonus2Coin() {
 
     });
 }
+function getname(){
+     var othername = $.trim($('.othername').val());
+     if(othername==""){
+            $('#tip_msg').html('<span style=\'color:red\'>请输入接收方账号</span>');
+            return;
+        }else{
+            $.ajax({
+            type: "post",
+            url: "/Home/Report/getname",
+            data: { othername: othername},
+            dataType: 'json',
+            async: false, //设置为同步操作就可以给全局变量赋值成功 
+            success: function (data) {
+                if (data.status == 1)
+                {
+                $('#tip_msg').html('<span style=\'color:green\'>'+data.msg+'</span>');
+                } else
+                {
+                    $('#tip_msg').html('<span style=\'color:red\'>'+data.msg+'</span>');
+                }
 
+            }
+        });
+            
+        }
+
+}
 //会员间互转
 function onMemberExchangeCoin() {
     layer.confirm('确认要转换吗？', function (index) {
@@ -583,6 +609,11 @@ function onMemberExchangeCoin() {
         var type = $.trim($('.type').val());
         var money = $.trim($('.money').val());
         var password = $.trim($('.password').val());
+        
+        if(othername==""){
+            $('#tip_msg').html('<span style=\'color:red\'>请输入接收方账号</span>');
+            return;
+        }
 
         $.ajax({
             type: "post",

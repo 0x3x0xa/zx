@@ -25,7 +25,7 @@
 </head>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务管理 <span class="c-gray en">&gt;</span> 后台充值明细 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
-<form method="get" action="/index.php/Report/recharge.html">
+<form method="get" action="/index.php/Admin/Report/recharge.html">
 <div class="pd-20">
   <div class="text-c"> 积分类型
  <span class="select-box" style='width:200px;'>

@@ -39,7 +39,7 @@
 							<span>用户登录</span>
 							
 						</div>
-						<form action="" method="post" style="padding-bottom: 30px;">
+						<form action="" method="post" style="padding-bottom: 30px;" id="form" onsubmit="return false;">
 							<div class="form_text_ipt">
                                 <i class="icon-mobile"></i>
                                 <input name="username" id="username" class="username" type="text" placeholder="输入账号">
@@ -68,7 +68,7 @@
 								
 							</div>
 							<div class="form_btn">
-								<button type="button" class="login_bt">登录</button>
+								<button type="submit"  class="login_bt" >登录</button>
 							</div>
 								<div class="form_check_ipt">
 								<div class="left check_left">	
@@ -130,7 +130,8 @@
                 $(this).attr('placeholder', '');
             }
         });
-        $('.login_bt').click(function () {
+        $("#form").submit(function () {
+            
             var uname = $.trim($('.username').val());
             var pwd = $.trim($('.pwd').val());
             var code = $.trim($('.code').val());

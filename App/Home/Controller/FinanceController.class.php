@@ -112,9 +112,13 @@ class FinanceController extends NotinController {
             $webconfig_table->save(array('id' => 3, 'value' => $todayTime + 60 * 60 * 24));
             $this->dayexec();
         }
-        if ($info['1']['value'] == $week) {
-            $webconfig_table->save(array('id' => 4, 'value' => $week + 60 * 60 * 24 * 7));
-            $this->weekexec();
+        $weektime = $week + 86400;
+        if ($todayTime == $weektime) {
+            $flagtime = $info['1']['value'] + 86400;
+            if ($weektime == $flagtime) {
+                $webconfig_table->save(array('id' => 4, 'value' => $week + 60 * 60 * 24 * 7));
+                $this->weekexec();
+            }
         }
         if ($info['2']['value'] == $nowmonth) {
             $webconfig_table->save(array('id' => 5, 'value' => $lastmonth));
@@ -165,31 +169,31 @@ class FinanceController extends NotinController {
         $count = count($userInfo);
         for ($i = 0; $i < $count; $i++) {
             if (!empty($userInfo[$i]['lingdaobonus']) && $userInfo[$i]['lingdaobonus'] > 0) {
-                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '2', 'expend' => $userInfo[$i]['lingdaobonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到动态钱袋', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
+                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '2', 'expend' => $userInfo[$i]['lingdaobonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到市场积分' . $i, 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
             }
             if (!empty($userInfo[$i]['guanlibonus']) && $userInfo[$i]['guanlibonus'] > 0) {
-                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '3', 'expend' => $userInfo[$i]['guanlibonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到动态钱袋', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
+                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '3', 'expend' => $userInfo[$i]['guanlibonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到市场积分', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
             }
             if (!empty($userInfo[$i]['jinjibonus']) && $userInfo[$i]['jinjibonus'] > 0) {
-                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '4', 'expend' => $userInfo[$i]['jinjibonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到动态钱袋', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
+                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '4', 'expend' => $userInfo[$i]['jinjibonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到市场积分', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
             }
             if (!empty($userInfo[$i]['quanqiufenhongbonus']) && $userInfo[$i]['quanqiufenhongbonus'] > 0) {
-                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '5', 'expend' => $userInfo[$i]['quanqiufenhongbonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到动态钱袋', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
+                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '5', 'expend' => $userInfo[$i]['quanqiufenhongbonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到市场积分', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
             }
             if (!empty($userInfo[$i]['yuexinbonus']) && $userInfo[$i]['yuexinbonus'] > 0) {
-                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '17', 'expend' => $userInfo[$i]['yuexinbonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到动态钱袋', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
+                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '17', 'expend' => $userInfo[$i]['yuexinbonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到市场积分', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
             }
             if (!empty($userInfo[$i]['hongbaobonus']) && $userInfo[$i]['hongbaobonus'] > 0) {
-                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '12', 'expend' => $userInfo[$i]['hongbaobonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到动态钱袋', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
+                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '12', 'expend' => $userInfo[$i]['hongbaobonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到市场积分', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
             }
             if (!empty($userInfo[$i]['daishubonus']) && $userInfo[$i]['daishubonus'] > 0) {
-                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '23', 'expend' => $userInfo[$i]['daishubonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到动态钱袋', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
+                $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '23', 'expend' => $userInfo[$i]['daishubonus'], 'status' => '2', 'balance' => 0, 'message' => '转入到市场积分', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '14')); //14合并转出
             }
             $shouru = $userInfo[$i]['lingdaobonus'] + $userInfo[$i]['guanlibonus'] + $userInfo[$i]['jinjibonus'] + $userInfo[$i]['quanqiufenhongbonus'] + $userInfo[$i]['yuexinbonus'] + $userInfo[$i]['hongbaobonus'] + $userInfo[$i]['daishubonus'];
             $userallbonus = $userInfo[$i]['lingdaobonus'] + $userInfo[$i]['guanlibonus'] + $userInfo[$i]['jinjibonus'] + $userInfo[$i]['quanqiufenhongbonus'] + $userInfo[$i]['yuexinbonus'] + $userInfo[$i]['hongbaobonus'] + $userInfo[$i]['allbonus'] + $userInfo[$i]['daishubonus'];
             if ($shouru != 0) {
-                $relust = $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '19', 'income' => $shouru, 'status' => '1', 'balance' => $userallbonus, 'message' => '动态奖金合并', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '13')); //13合并转入
-                $relust1 = $member_table->save(array('id' => $userInfo[$i]["id"], 'lingdaoBonus' => '0', 'guanliBonus' => '0', 'jinjiBonus' => '0', 'quanqiufenhongBonus' => '0', 'yuexinBonus' => '0', 'hongbaobonus', 'allbonus' => $userallbonus));
+                $relust = $bonus_table->add(array('uid' => $userInfo[$i]["id"], 'type' => '19', 'income' => $shouru, 'status' => '1', 'balance' => $userallbonus, 'message' => '市场积分合并', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '13')); //13合并转入
+                $relust1 = $member_table->save(array('id' => $userInfo[$i]["id"], 'lingdaoBonus' => '0', 'guanliBonus' => '0', 'jinjiBonus' => '0', 'quanqiufenhongBonus' => '0', 'yuexinBonus' => '0', 'hongbaobonus' => '0', 'daishubonus' => '0', 'allbonus' => $userallbonus));
                 if ($relust && $relust1) {
                     $member_table->commit();
                 } else {
@@ -199,6 +203,7 @@ class FinanceController extends NotinController {
             } else {
                 $member_table->rollback();
             }
+            unset($userInfo[$i]);
         }
     }
 
@@ -239,93 +244,93 @@ class FinanceController extends NotinController {
     }
 
     //统计市场业绩
-   /* protected function lingdaoBonusCount() {
+    /* protected function lingdaoBonusCount() {
 
-        $time = time();
-        $todayTime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-        //$tomorrow = $todayTime + 60 * 60 * 24; //明天凌晨
-        $yesterday = $todayTime - 60 * 60 * 24; //昨天凌晨
-        //
-        //p($tomorrow);
-        //exit;
-        $member_table = M('member');
-        $total_table = M('total');
+      $time = time();
+      $todayTime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+      //$tomorrow = $todayTime + 60 * 60 * 24; //明天凌晨
+      $yesterday = $todayTime - 60 * 60 * 24; //昨天凌晨
+      //
+      //p($tomorrow);
+      //exit;
+      $member_table = M('member');
+      $total_table = M('total');
 
-        $achievement_table = M('achievement');
-        $balance_table = M('balance');
-        $member_table->startTrans();
-        $junctionLevel = $member_table->field('junctionLevel')->max('junctionLevel'); //最后一层
+      $achievement_table = M('achievement');
+      $balance_table = M('balance');
+      $member_table->startTrans();
+      $junctionLevel = $member_table->field('junctionLevel')->max('junctionLevel'); //最后一层
 
-        for ($i = $junctionLevel; $i >= 1; $i--) {
+      for ($i = $junctionLevel; $i >= 1; $i--) {
 
-            $list = $member_table->field('id,junction,level,position')->where(array('junctionLevel' => $i, 'level' => array('neq', '1')))->select(); //最后一层的用户个数
+      $list = $member_table->field('id,junction,level,position')->where(array('junctionLevel' => $i, 'level' => array('neq', '1')))->select(); //最后一层的用户个数
 
-            $count = count($list);
-            for ($j = 0; $j < $count; $j++) {
+      $count = count($list);
+      for ($j = 0; $j < $count; $j++) {
 
-                $balance = $balance_table->where(array('uid' => $list[$j]['id'], 'addtime' => $todayTime))->find(); //昨天剩余下来的奖金
-                $balance['balance'] = (empty($balance)) ? 0 : $balance['balance'];
-                $achievements = $achievement_table->where(array('uid' => $list[$j]['id'], 'addtime' => $yesterday))->sum('money'); //获取到昨天的业绩
-                $achievement = (!empty($achievements)) ? $achievements : 0;
-                $selfrelust = $total_table->where(array('uid' => $list[$j]['id'], 'addtime' => $todayTime))->find(); //判断本人今天有没有插入数据
-                $junctionrelust = $total_table->field('id,selfmoney,groupmoney')->where(array('uid' => $list[$j]['junction'], 'addtime' => $todayTime))->find(); //判断父级今天有没有插入数据
-                $junlist = $member_table->field('position,level,junction')->find($list[$j]['junction']);
+      $balance = $balance_table->where(array('uid' => $list[$j]['id'], 'addtime' => $todayTime))->find(); //昨天剩余下来的奖金
+      $balance['balance'] = (empty($balance)) ? 0 : $balance['balance'];
+      $achievements = $achievement_table->where(array('uid' => $list[$j]['id'], 'addtime' => $yesterday))->sum('money'); //获取到昨天的业绩
+      $achievement = (!empty($achievements)) ? $achievements : 0;
+      $selfrelust = $total_table->where(array('uid' => $list[$j]['id'], 'addtime' => $todayTime))->find(); //判断本人今天有没有插入数据
+      $junctionrelust = $total_table->field('id,selfmoney,groupmoney')->where(array('uid' => $list[$j]['junction'], 'addtime' => $todayTime))->find(); //判断父级今天有没有插入数据
+      $junlist = $member_table->field('position,level,junction')->find($list[$j]['junction']);
 
-                $allmoney = $balance['balance'] + $achievement + $selfrelust['groupmoney']; //该会员的业绩
-                $self_ach_bal = $balance['balance'] + $achievement; //今天有没钱要更新
-                $groupmoneys = $achievement + $selfrelust['groupmoney'];
-                // if ($allmoney != 0) {
-                //判断有没有记录，有就加，没有就插入
-                if ($selfrelust) {
+      $allmoney = $balance['balance'] + $achievement + $selfrelust['groupmoney']; //该会员的业绩
+      $self_ach_bal = $balance['balance'] + $achievement; //今天有没钱要更新
+      $groupmoneys = $achievement + $selfrelust['groupmoney'];
+      // if ($allmoney != 0) {
+      //判断有没有记录，有就加，没有就插入
+      if ($selfrelust) {
 
-                    $rel1 = $total_table->save(array('id' => $selfrelust['id'], 'selfmoney' => $achievement, 'balance' => $balance['balance'], 'allmoney' => $allmoney, 'pid' => $list[$j]['junction'], 'level' => $list[$j]['level'], 'position' => $list[$j]['position']));
-                } else {
-//                    p($list[$j]['id']);
-//                    p($achievement);
-//                    p($list[$j]['junction']);
-//                    exit;
-                    $rel1 = $total_table->add(array('uid' => $list[$j]['id'], 'selfmoney' => $achievement, 'balance' => $balance['balance'], 'allmoney' => $allmoney, 'pid' => $list[$j]['junction'], 'level' => $list[$j]['level'], 'position' => $list[$j]['position'], 'groupmoney' => '0', 'create_date' => $time, 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime));
-                }
-                //如果父接点有就更新，没有就插入
-                if ($list[$j]['junction'] != 0) {
-                    // if ($groupmoneys != 0) {
-                    if ($junctionrelust) {
-                        $rel2 = $total_table->save(array('id' => $junctionrelust['id'], 'selfmoney' => '0', 'groupmoney' => $achievement + $selfrelust['groupmoney'] + $junctionrelust['groupmoney']));
-                    } else {
-                        //  if($achievement != 0){
-                        //   if ($selfrelust) {
+      $rel1 = $total_table->save(array('id' => $selfrelust['id'], 'selfmoney' => $achievement, 'balance' => $balance['balance'], 'allmoney' => $allmoney, 'pid' => $list[$j]['junction'], 'level' => $list[$j]['level'], 'position' => $list[$j]['position']));
+      } else {
+      //                    p($list[$j]['id']);
+      //                    p($achievement);
+      //                    p($list[$j]['junction']);
+      //                    exit;
+      $rel1 = $total_table->add(array('uid' => $list[$j]['id'], 'selfmoney' => $achievement, 'balance' => $balance['balance'], 'allmoney' => $allmoney, 'pid' => $list[$j]['junction'], 'level' => $list[$j]['level'], 'position' => $list[$j]['position'], 'groupmoney' => '0', 'create_date' => $time, 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime));
+      }
+      //如果父接点有就更新，没有就插入
+      if ($list[$j]['junction'] != 0) {
+      // if ($groupmoneys != 0) {
+      if ($junctionrelust) {
+      $rel2 = $total_table->save(array('id' => $junctionrelust['id'], 'selfmoney' => '0', 'groupmoney' => $achievement + $selfrelust['groupmoney'] + $junctionrelust['groupmoney']));
+      } else {
+      //  if($achievement != 0){
+      //   if ($selfrelust) {
 
-                        $rel2 = $total_table->add(array('uid' => $list[$j]['junction'], 'selfmoney' => '0', 'groupmoney' => $selfrelust['groupmoney'] + $achievement, 'balance' => 0, 'position' => $junlist['position'], 'level' => $junlist['level'], 'pid' => $junlist['junction'], 'create_date' => $time, 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime));
-                        //  } else {
-                        //      $total_table->add(array('uid' => $list[$j]['junction'], 'selfmoney' => '0', 'groupmoney' => $achievement+$selfrelust['groupmoney'], 'create_date' => $time, 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime));
-                        //     }
-                        // }
-                    }
-                    // }
-                }
-                //  }
-                if ($list[$j]['junction'] != 0) {
-                    if ($rel1 && $rel2) {
-                        $member_table->commit();
-                    } else {
-                        $member_table->rollback();
-                        exit;
-                    }
-                } else {
-                    if ($rel1) {
-                        $member_table->commit();
-                    } else {
-                        $member_table->rollback();
-                        exit;
-                    }
-                }
-            }
-        }
-    }
+      $rel2 = $total_table->add(array('uid' => $list[$j]['junction'], 'selfmoney' => '0', 'groupmoney' => $selfrelust['groupmoney'] + $achievement, 'balance' => 0, 'position' => $junlist['position'], 'level' => $junlist['level'], 'pid' => $junlist['junction'], 'create_date' => $time, 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime));
+      //  } else {
+      //      $total_table->add(array('uid' => $list[$j]['junction'], 'selfmoney' => '0', 'groupmoney' => $achievement+$selfrelust['groupmoney'], 'create_date' => $time, 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime));
+      //     }
+      // }
+      }
+      // }
+      }
+      //  }
+      if ($list[$j]['junction'] != 0) {
+      if ($rel1 && $rel2) {
+      $member_table->commit();
+      } else {
+      $member_table->rollback();
+      exit;
+      }
+      } else {
+      if ($rel1) {
+      $member_table->commit();
+      } else {
+      $member_table->rollback();
+      exit;
+      }
+      }
+      }
+      }
+      }
 
-	*/
+     */
 
-	    //统计市场业绩
+    //统计市场业绩
     protected function lingdaoBonusCount() {
 
         $time = time();
@@ -340,7 +345,7 @@ class FinanceController extends NotinController {
 
         $achievement_table = M('achievement');
         $balance_table = M('balance');
-       // $member_table->startTrans();
+        // $member_table->startTrans();
         $junctionLevel = $member_table->field('junctionLevel')->max('junctionLevel'); //最后一层
 
         for ($i = $junctionLevel; $i >= 1; $i--) {
@@ -409,7 +414,6 @@ class FinanceController extends NotinController {
             }
         }
     }
-
 
     //开发奖结算
     protected function lingdaoSettlement() {
@@ -1130,42 +1134,95 @@ class FinanceController extends NotinController {
     }
 
     //每周的积分自动产生奖金 （按积分的百分之二的比例转入到分红钱包）
+    /* protected function weekbonus() {
+      $todayTime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+      $beginThismonth = mktime(0, 0, 0, date('m'), 1, date('Y'));  //当月第一天时间戳
+      $week = mktime(0, 0, 0, date('m'), date('d') - date('w'), date('Y')); //当周第一天
+      $member_table = M('member');
+      $bonus_table = M('bonus');
+      $weekfenhong = M('weekfenhong');
+      $memberlevel = M('memberlevel');
+      $list = $member_table->field('id,integral,fenhongbonus,level')->where(array('status' => '1', 'level' => array('in', '2,3,4')))->select(); //取正常用户的积分
+      $count = count($list);
+      for ($i = 0; $i < $count; $i++) {
+
+      $rel = $weekfenhong->where(array('uid' => $list[$i]['id']))->find();
+      if ($rel) {
+      $info = $memberlevel->field('registermoney')->find($list[$i]['level']);
+      if ($rel['money'] < $info['registermoney']) {
+      $usermoneys = $list[$i]['integral'] * 0.02; //积分的百分之二
+      $usermoney = $this->splitbonus($list[$i]['id'], $usermoneys);
+      $allusermoney = $list[$i]['fenhongbonus'] + $usermoney;
+
+      $weekfenhong->save(array('id' => $rel['id'], 'money' => $rel['money'] + $usermoneys, 'create_date' => time()));
+      $member_table->save(array('id' => $list[$i]['id'], 'fenhongbonus' => $allusermoney));
+
+      $bonus_table->add(array('uid' => $list[$i]['id'], 'type' => '14', 'income' => $usermoney, 'balance' => $allusermoney, 'status' => '1', 'message' => '分红奖.', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '3'));
+      }
+      } else {
+
+
+      $usermoneys = $list[$i]['integral'] * 0.02; //积分的百分之二
+      $usermoney = $this->splitbonus($list[$i]['id'], $usermoneys);
+      $allusermoney = $list[$i]['fenhongbonus'] + $usermoney;
+
+      $weekfenhong->add(array('uid' => $list[$i]['id'], 'money' => $usermoneys, 'create_date' => time()));
+
+      $member_table->save(array('id' => $list[$i]['id'], 'fenhongbonus' => $allusermoney));
+      $bonus_table->add(array('uid' => $list[$i]['id'], 'type' => '14', 'income' => $usermoney, 'balance' => $allusermoney, 'status' => '1', 'message' => '分红奖.', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '3'));
+      }
+      }
+      } */
+
+    //每周的积分自动产生奖金 （按积分的百分之二的比例转入到分红钱包）
     protected function weekbonus() {
         $todayTime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
         $beginThismonth = mktime(0, 0, 0, date('m'), 1, date('Y'));  //当月第一天时间戳
         $week = mktime(0, 0, 0, date('m'), date('d') - date('w'), date('Y')); //当周第一天
         $member_table = M('member');
         $bonus_table = M('bonus');
-        $weekfenhong = M('weekfenhong');
-        $memberlevel = M('memberlevel');
-        $list = $member_table->field('id,integral,fenhongbonus,level')->where(array('status' => '1', 'level' => array('in', '2,3,4')))->select(); //取正常用户的积分
+        $weekzengsong_table = M('weekzengsong');
+        $achievement_table = M('achievement');
+        ///$memberlevel = M('memberlevel');
+        $list = $member_table->field('id,integral,level')->where(array('status' => '1', 'level' => array('in', '2,3,4,5')))->select(); //取正常用户的积分
+
+        $bounslist = array('1800' => '18', '9000' => '90', '18000' => '180', '36000' => '360'); //对应等级每周赠送的积分
+
         $count = count($list);
         for ($i = 0; $i < $count; $i++) {
-
-            $rel = $weekfenhong->where(array('uid' => $list[$i]['id']))->find();
+            $xiaofeimoney =  intval( $achievement_table->where(array('uid' => $list[$i]['id']))->sum('money'));
+            $rel = $weekzengsong_table->where(array('uid' => $list[$i]['id']))->find();
             if ($rel) {
-                $info = $memberlevel->field('registermoney')->find($list[$i]['level']);
-                if ($rel['money'] < $info['registermoney']) {
-                    $usermoneys = $list[$i]['integral'] * 0.02; //积分的百分之二 
-                    $usermoney = $this->splitbonus($list[$i]['id'], $usermoneys);
-                    $allusermoney = $list[$i]['fenhongbonus'] + $usermoney;
+                //$info = $memberlevel->field('registermoney')->find($list[$i]['level']);
+                if ($rel['total'] <= 50) {//五十周
+                    //$usermoneys = $list[$i]['integral'] * 0.02; //积分的百分之二 
+                    // $usermoney = $this->splitbonus($list[$i]['id'], $usermoneys);
+                    // $allusermoney = $list[$i]['fenhongbonus'] + $usermoney;
+                    $usermoneys = $bounslist[$xiaofeimoney]; //赠送积分
+                    if (!empty($usermoneys)) {
+                        $allusermoney = $list[$i]['integral'] + $usermoneys;
 
-                    $weekfenhong->save(array('id' => $rel['id'], 'money' => $rel['money'] + $usermoneys, 'create_date' => time()));
-                    $member_table->save(array('id' => $list[$i]['id'], 'fenhongbonus' => $allusermoney));
+                        $weekzengsong_table->save(array('id' => $rel['id'], 'money' => $rel['money'] + $usermoneys, 'create_date' => time(), 'total' => $rel['total'] + 1));
+                        $member_table->save(array('id' => $list[$i]['id'], 'integral' => $allusermoney));
 
-                    $bonus_table->add(array('uid' => $list[$i]['id'], 'type' => '14', 'income' => $usermoney, 'balance' => $allusermoney, 'status' => '1', 'message' => '分红奖.', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '3'));
+                        $bonus_table->add(array('uid' => $list[$i]['id'], 'type' => '10', 'income' => $usermoneys, 'balance' => $allusermoney, 'status' => '1', 'message' => '赠送积分（周）.', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '3'));
+                    }
                 }
             } else {
 
 
-                $usermoneys = $list[$i]['integral'] * 0.02; //积分的百分之二 
-                $usermoney = $this->splitbonus($list[$i]['id'], $usermoneys);
-                $allusermoney = $list[$i]['fenhongbonus'] + $usermoney;
+                //$usermoneys = $list[$i]['integral'] * 0.02; //积分的百分之二 
+                //$usermoney = $this->splitbonus($list[$i]['id'], $usermoneys);
+                //$allusermoney = $list[$i]['fenhongbonus'] + $usermoney;
 
-                $weekfenhong->add(array('uid' => $list[$i]['id'], 'money' => $usermoneys, 'create_date' => time()));
+                $usermoneys = $bounslist[$xiaofeimoney]; //赠送积分
+                $allusermoney = $list[$i]['integral'] + $usermoneys;
+                if (!empty($usermoneys)) {
+                    $weekzengsong_table->add(array('uid' => $list[$i]['id'], 'money' => $usermoneys, 'create_date' => time(), 'total' => '1'));
 
-                $member_table->save(array('id' => $list[$i]['id'], 'fenhongbonus' => $allusermoney));
-                $bonus_table->add(array('uid' => $list[$i]['id'], 'type' => '14', 'income' => $usermoney, 'balance' => $allusermoney, 'status' => '1', 'message' => '分红奖.', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '3'));
+                    $member_table->save(array('id' => $list[$i]['id'], 'integral' => $allusermoney));
+                    $bonus_table->add(array('uid' => $list[$i]['id'], 'type' => '10', 'income' => $usermoneys, 'balance' => $allusermoney, 'status' => '1', 'message' => '赠送积分（周）.', 'create_date' => time(), 'date' => date('Y-m-d H:i:s'), 'addtime' => $todayTime, 'month' => $beginThismonth, 'week' => $week, 'action' => '3'));
+                }
             }
         }
     }

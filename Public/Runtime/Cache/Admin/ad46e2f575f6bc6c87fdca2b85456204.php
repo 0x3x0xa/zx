@@ -26,7 +26,7 @@
 </head>
 <body>
     <article class="page-container">
-        <form action="/index.php/Member/useradd.html" method="post" class="form form-horizontal registerform" id="form-member-add">
+        <form action="/index.php/Admin/Member/useradd.html" method="post" class="form form-horizontal registerform" id="form-member-add">
             {__TOKEN__} 
             <fieldset style="border: 1px solid #56b4f3; border-radius: 9px;">
                 <legend style="margin-left: 50px; color: #fff; background-color: #56b4f3;width:80px;font-size: 12px;text-align: center; margin-bottom: 0px;height:25px;line-height: 25px;">注册会员</legend>
