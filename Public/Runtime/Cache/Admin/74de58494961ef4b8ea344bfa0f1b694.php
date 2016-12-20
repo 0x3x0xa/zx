@@ -52,7 +52,7 @@
     <tbody>
 	<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr class="text-c">
 	 <td><?php echo ($i); ?></td>
-        <td><?php echo (date('Y-m-d H:i:s',$vo["week"])); ?></td>
+        <td><?php echo (date('Y-m-d',$vo["week"])); ?></td>
         <td><?php echo ($vo["price"]); ?></td>
 	<td><?php echo (date('Y-m-d H:i:s',$vo["create_date"])); ?></td>
         <!--<td class="text-c"><?php echo ($status[$vo[status]]); ?></td>-->
